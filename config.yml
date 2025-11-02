@@ -1,0 +1,79 @@
+# VC Hype Simulation - Global Configuration
+# Seshat (Quant Analyst) - Initial configuration
+
+simulation:
+  n_founders: 200
+  n_runs: 50
+  random_seed: 42
+  output_dir: "results/"
+
+# Hype(t) Markov Chain States
+hype_states:
+  risk_off:
+    beta_multiplier: 0.5  # Low sensitivity to narrative
+    valuation_spread: 1.0
+  normal:
+    beta_multiplier: 1.0  # Baseline
+    valuation_spread: 1.5
+  hype:
+    beta_multiplier: 2.5  # High sensitivity to narrative/charisma
+    valuation_spread: 3.0
+
+# Hype state transition matrix
+# Rows: current state [risk_off, normal, hype]
+# Cols: next state [risk_off, normal, hype]
+hype_transition_matrix:
+  - [0.7, 0.25, 0.05]   # From risk_off
+  - [0.1, 0.7, 0.2]     # From normal
+  - [0.15, 0.3, 0.55]   # From hype
+
+# Initial hype state distribution
+initial_hype_state: "normal"
+
+# Founder feature priors
+founder_priors:
+  revenue:
+    distribution: "lognormal"
+    mean: 11.5  # ln(100K) ≈ 11.5
+    std: 2.0
+  growth:
+    distribution: "normal"
+    mean: 0.5  # 50% YoY
+    std: 0.3
+  charisma:
+    distribution: "normal"
+    mean: 0.0
+    std: 1.0
+  vision:
+    distribution: "normal"
+    mean: 0.0
+    std: 1.0
+  traction_quality:
+    distribution: "normal"
+    mean: 0.0
+    std: 1.0
+  geo_flex:
+    distribution: "beta"
+    alpha: 2
+    beta: 5  # Most founders prefer their current location
+  repeat_founder:
+    distribution: "bernoulli"
+    p: 0.15  # 15% are repeat founders
+
+# Domain distribution (categorical)
+domains:
+  ai: 0.35
+  bio: 0.15
+  consumer: 0.25
+  enterprise: 0.25
+
+# Post-funding growth multipliers by domain (toy model)
+domain_growth_multipliers:
+  ai: 1.25
+  bio: 1.10
+  consumer: 1.15
+  enterprise: 1.20
+
+# Noise parameters
+noise:
+  scoring_epsilon_std: 0.5  # Standard deviation for scoring noise

@@ -1,0 +1,24 @@
+# Historical High-Profile VC Cases - Context for Hype Analysis
+# Thoth (Data Acquisition) - 2025-11-02
+# Source: Public disclosures, Crunchbase, press archives
+company,year_founded,year_peak_hype,domain,primary_region,total_raised_m,peak_valuation_m,outcome,narrative_keywords,outcome_year,notes
+Juicero,2013,2016,consumer,bay_area,120,200,failure,"category-defining hardware IoT connected-home reinventing",2017,"$400 juicer; packets could be squeezed by hand. Became symbol of excess"
+Theranos,2003,2014,bio,bay_area,700,9000,fraud,"revolutionary paradigm-shift healthcare democratizing Edison",2018,"Blood testing fraud. Criminal charges. Peak hype elasticity failure"
+Quibi,2018,2020,consumer,la,1750,1750,failure,"mobile-first premium short-form revolutionary star-studded",2020,"Shutdown after 6 months. $1.75B raised from elite VCs. Narrative > execution"
+WeWork,2010,2019,enterprise,nyc,12800,47000,near_failure,"community physical-social reimagining culture-driven visionary",2019,"IPO collapse. Valuation fell from $47B to ~$8B. Founder ousted"
+Beepi,2013,2015,consumer,bay_area,150,560,failure,"transparent marketplace disruptive peer-to-peer reinventing",2017,"Used car marketplace. Burned through capital. Shut down with no exit"
+Fab.com,2011,2013,consumer,nyc,336,1000,failure,"flash-sales design-focused rapid-growth viral",2015,"Pivoted multiple times. Sold for $15M after raising $336M"
+Color Genomics,2013,2015,bio,bay_area,41,100,pivot,"population-health AI-driven preventative breakthrough",2024,"Pivoted from consumer to enterprise. Survives but missed vision"
+Magic Leap,2011,2017,consumer,bay_area,2600,6400,underperformance,"spatial-computing revolutionary AR breakthrough secretive",2024,"Raised $2.6B. Layoffs and pivots. Product underdelivered on hype"
+Clinkle,2011,2013,consumer,bay_area,30,50,failure,"mobile-payments paradigm-shift college-founder visionary",2015,"Stanford founder. Elite VC backing. Product delays and shutdowns"
+Hampton Creek (JUST),2011,2015,consumer,bay_area,220,1000,pivot,"plant-based sustainable revolutionary food-tech category-defining",2024,"Bill Gates backed. Multiple controversies. Survived but scaled back"
+Better.com,2014,2020,enterprise,nyc,900,7700,underperformance,"digital-first mortgage-tech AI-powered efficient disruptive",2024,"Mass Zoom layoffs controversy. Valuation crashed post-SPAC"
+Gopuff,2013,2021,consumer,bay_area,3400,15000,underperformance,"instant-delivery hyperlocal logistics category-defining",2024,"Peak pandemic hype. Down rounds and layoffs as growth slowed"
+Bird,2017,2018,consumer,la,775,2500,near_failure,"micromobility sustainable last-mile revolutionary urban",2023,"SPAC at $2.3B. Filed Chapter 11 in 2023. Hype > unit economics"
+Jawbone,1999,2014,consumer,bay_area,930,3300,failure,"wearables fitness lifestyle-tech beautiful design premium",2017,"Multiple pivots. Liquidated 2017. Competed with Fitbit but failed"
+Vine,2012,2013,consumer,nyc,1.8,30,acquired_shutdown,"social-video viral creative short-form revolutionary",2017,"Acquired by Twitter pre-launch for $30M. Shut down 2017 despite popularity"
+Casper,2014,2017,consumer,nyc,340,1100,underperformance,"direct-to-consumer sleep-tech brand-driven category-defining",2024,"IPO at $575M (down from $1.1B). Struggled with CAC and competition"
+Peloton,2012,2020,consumer,nyc,1700,50000,underperformance,"connected-fitness community pandemic-winner at-home cult-brand",2024,"Peak $50B. Fell to ~$1B. Overhired during pandemic. Cautionary tale"
+Houzz,2009,2017,consumer,bay_area,613,4000,underperformance,"home-design marketplace AR two-sided visual-discovery",2024,"Layoffs and down rounds. Couldn't monetize platform effectively"
+23andMe,2006,2017,bio,bay_area,786,2500,underperformance,"consumer-genetics ancestry preventative FDA-approved breakthrough",2024,"IPO via SPAC. Stock crashed. Privacy concerns and low repeat purchase"
+Convoy,2015,2019,enterprise,seattle,900,3800,failure,"freight-tech logistics digital marketplace network-effects",2023,"Shut down 2023. Competed with Uber Freight. Market timing issues"

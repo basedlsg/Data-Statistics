@@ -1,0 +1,194 @@
+# Regional VC Capital Allocation Data
+# Thoth (Data Acquisition) - 2025-11-02
+#
+# Sources: PitchBook (2023-2024), NVCA Yearbook 2024, Carta State of Private Markets
+# Note: These are estimates based on publicly available data. Will be replaced with
+# exact figures when proprietary data access is available.
+
+regions:
+  bay_area:
+    name: "San Francisco Bay Area"
+    # Includes: SF, San Jose, Oakland, Peninsula, South Bay
+    capital_share: 0.45  # ~45% of US VC capital
+    annual_capital_bn: 90.0  # Billions USD (2023-2024 estimate)
+
+    # Feature weights for scoring function
+    weights:
+      revenue: 0.6
+      growth: 0.8
+      charisma: 1.2        # Bay Area values vision/charisma highly
+      vision: 1.5          # Strong preference for "big vision"
+      traction_quality: 0.7
+      repeat_founder: 1.1
+      geo_flex: 0.3
+
+    # Domain preferences (multipliers)
+    domain_preferences:
+      ai: 1.8              # Strong AI preference
+      bio: 0.9
+      consumer: 1.0
+      enterprise: 1.1
+
+    # Hype sensitivity (β_region)
+    hype_beta: 1.5         # High hype elasticity
+
+    # Stage mix
+    stage_mix:
+      seed: 0.25
+      series_a: 0.35
+      series_b_plus: 0.40
+
+    # Average check size by stage (millions USD)
+    check_sizes:
+      seed: 2.5
+      series_a: 12.0
+      series_b_plus: 35.0
+
+    notes: |
+      Bay Area remains dominant in VC with ~45% of capital. Strong preference for
+      AI/ML infrastructure, narrative-driven founders, and "category-defining" visions.
+      Tolerant of pre-revenue companies with strong team pedigree.
+      Source: PitchBook Q4 2023, NVCA 2024 Yearbook
+
+  nyc:
+    name: "New York City"
+    capital_share: 0.20  # ~20% of US VC capital
+    annual_capital_bn: 40.0
+
+    weights:
+      revenue: 1.4         # NYC values revenue highly
+      growth: 1.2
+      charisma: 0.7
+      vision: 0.6
+      traction_quality: 1.3
+      repeat_founder: 0.9
+      geo_flex: 0.4
+
+    domain_preferences:
+      ai: 1.0
+      bio: 0.7
+      consumer: 1.1
+      enterprise: 1.5      # Strong enterprise/fintech preference
+
+    hype_beta: 0.8         # Moderate hype elasticity
+
+    stage_mix:
+      seed: 0.20
+      series_a: 0.35
+      series_b_plus: 0.45
+
+    check_sizes:
+      seed: 2.0
+      series_a: 10.0
+      series_b_plus: 30.0
+
+    notes: |
+      NYC ecosystem emphasizes fundamentals, revenue, and enterprise/fintech domains.
+      More risk-averse than Bay Area; prefers proven business models with clear paths
+      to profitability. Strong media/advertising tech presence.
+      Source: PitchBook NYC Market Report 2024
+
+  boston:
+    name: "Boston/Cambridge"
+    capital_share: 0.15  # ~15% of US VC capital
+    annual_capital_bn: 30.0
+
+    weights:
+      revenue: 1.1
+      growth: 1.0
+      charisma: 0.5
+      vision: 0.7
+      traction_quality: 1.4  # Values scientific traction
+      repeat_founder: 1.3    # Strong repeat founder preference
+      geo_flex: 0.5
+
+    domain_preferences:
+      ai: 1.0
+      bio: 2.0             # Very strong bio/life sciences preference
+      consumer: 0.6
+      enterprise: 1.2
+
+    hype_beta: 0.5         # Low hype elasticity (most conservative)
+
+    stage_mix:
+      seed: 0.15
+      series_a: 0.30
+      series_b_plus: 0.55
+
+    check_sizes:
+      seed: 1.8
+      series_a: 9.0
+      series_b_plus: 28.0
+
+    notes: |
+      Boston/Cambridge ecosystem built around MIT, Harvard, and strong life sciences
+      institutions. Conservative, science-driven investing with lower hype sensitivity.
+      Emphasis on technical depth, publications, and academic pedigree.
+      Source: MassTech Venture Capital Report 2024
+
+  la:
+    name: "Los Angeles"
+    capital_share: 0.10  # ~10% of US VC capital
+    annual_capital_bn: 20.0
+
+    weights:
+      revenue: 0.8
+      growth: 1.0
+      charisma: 1.4        # LA values brand/charisma
+      vision: 1.2
+      traction_quality: 0.9
+      repeat_founder: 0.8
+      geo_flex: 0.6
+
+    domain_preferences:
+      ai: 0.8
+      bio: 0.5
+      consumer: 1.7        # Strong consumer/media preference
+      enterprise: 0.9
+
+    hype_beta: 1.3         # High hype elasticity (narrative-driven)
+
+    stage_mix:
+      seed: 0.30
+      series_a: 0.40
+      series_b_plus: 0.30
+
+    check_sizes:
+      seed: 2.2
+      series_a: 10.5
+      series_b_plus: 25.0
+
+    notes: |
+      LA ecosystem focused on consumer, media, entertainment tech, and creator economy.
+      Values brand-building, storytelling, and celebrity/influencer connections.
+      Growing but still smaller than traditional hubs.
+      Source: PitchBook LA Market Report 2023
+
+# Robustness check regions (for later analysis)
+robustness_regions:
+  seattle:
+    name: "Seattle"
+    capital_share: 0.05
+    annual_capital_bn: 10.0
+    notes: "Strong in cloud/infrastructure (AWS ecosystem), enterprise SaaS"
+
+  austin:
+    name: "Austin"
+    capital_share: 0.03
+    annual_capital_bn: 6.0
+    notes: "Growing ecosystem, hardware/semiconductors, enterprise software"
+
+# Metadata
+metadata:
+  last_updated: "2025-11-02"
+  data_year: "2023-2024"
+  sources:
+    - "PitchBook Q4 2023 US VC Market Report"
+    - "NVCA 2024 Yearbook"
+    - "Carta State of Private Markets Q2 2024"
+    - "Regional VC associations (MassTech, etc.)"
+  notes: |
+    Capital shares are estimates based on deal count and dollar volume from public
+    sources. Actual figures may vary. Domain preferences and feature weights are
+    stylized based on ecosystem reputation and representative portfolio analysis.
+    Will be refined with proprietary data access (PitchBook API, etc.)

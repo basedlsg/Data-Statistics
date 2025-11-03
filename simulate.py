@@ -563,8 +563,15 @@ class Simulation:
             if not lead_candidates:
                 continue  # No region can afford this founder
 
-            # Winner: highest score
-            lead_candidates.sort(key=lambda x: x[1], reverse=True)
+            # Winner: highest score or best score-per-dollar (based on config)
+            use_spd = self.config["simulation"].get("use_score_per_dollar", False)
+            if use_spd:
+                # Sort by score-per-dollar (efficiency)
+                lead_candidates.sort(key=lambda x: (x[1] / x[2], x[1]), reverse=True)
+            else:
+                # Sort by raw score
+                lead_candidates.sort(key=lambda x: x[1], reverse=True)
+
             lead_region, lead_score, total_check_size = lead_candidates[0]
 
             # Lead invests 65% of round

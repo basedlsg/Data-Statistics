@@ -122,9 +122,18 @@ class RegionConfig:
     check_sigma: Dict[str, float] = field(default_factory=dict)  # Lognormal sigma by stage
     domain_mult: Dict[str, float] = field(default_factory=dict)  # Domain cost multipliers
 
-    def get_stage_budget(self, stage: Stage) -> float:
-        """Get budget for a specific stage (in millions)."""
-        return self.annual_capital_bn * 1000 * self.stage_mix[stage]
+    def get_stage_budget(self, stage: Stage, scale_factor: float = 1.0) -> float:
+        """
+        Get budget for a specific stage (in millions).
+
+        Args:
+            stage: Funding stage
+            scale_factor: Fraction of annual budget to use (e.g., 0.05 = 5% of annual budget)
+
+        Returns:
+            Budget in millions USD
+        """
+        return self.annual_capital_bn * 1000 * self.stage_mix[stage] * scale_factor
 
 
 @dataclass
@@ -509,13 +518,14 @@ class Simulation:
                 founder.scores[region_key] = score
                 all_scores[region_key][founder.id] = score
 
-        # Step 2: Initialize regional budgets
+        # Step 2: Initialize regional budgets (with scale factor for realistic scarcity)
+        scale_factor = self.config["simulation"].get("budget_scale_factor", 1.0)
         budgets = {}
         for region_key, region_config in self.regions.items():
             budgets[region_key] = {
-                "seed": region_config.get_stage_budget("seed"),
-                "series_a": region_config.get_stage_budget("series_a"),
-                "series_b_plus": region_config.get_stage_budget("series_b_plus")
+                "seed": region_config.get_stage_budget("seed", scale_factor),
+                "series_a": region_config.get_stage_budget("series_a", scale_factor),
+                "series_b_plus": region_config.get_stage_budget("series_b_plus", scale_factor)
             }
 
         # Step 3: Sort founders by "market heat" (max score across all regions)

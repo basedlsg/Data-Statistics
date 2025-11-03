@@ -117,24 +117,70 @@ export function getMockMeta(): SimulationMeta {
 }
 
 /**
- * Generate mock simulation runs
+ * Generate mock simulation runs with REALISTIC distributions
  */
 export function getMockRuns(filter?: RunFilter): FounderRun[] {
-  const regions: Region[] = ['bay_area', 'nyc', 'boston', 'la'];
-  const stages: Stage[] = ['seed', 'series_a', 'series_b_plus'];
-  const domains: Domain[] = ['ai', 'bio', 'consumer', 'enterprise'];
-
   const runs: FounderRun[] = [];
+
+  // Realistic regional distribution (matches budget shares)
+  const regionalDistribution: Record<Region, number> = {
+    bay_area: 0.524,  // 52.4%
+    nyc: 0.238,       // 23.8%
+    boston: 0.131,    // 13.1%
+    la: 0.107,        // 10.7%
+  };
+
+  // Domain preferences by region
+  const domainPreferences: Record<Region, Record<Domain, number>> = {
+    bay_area: { ai: 0.45, bio: 0.15, consumer: 0.20, enterprise: 0.20 },
+    nyc: { ai: 0.20, bio: 0.10, consumer: 0.20, enterprise: 0.50 },
+    boston: { ai: 0.25, bio: 0.40, consumer: 0.10, enterprise: 0.25 },
+    la: { ai: 0.15, bio: 0.10, consumer: 0.50, enterprise: 0.25 },
+  };
 
   // Generate 1000 mock founders across 5 runs
   for (let runId = 0; runId < 5; runId++) {
     for (let founderId = 0; founderId < 200; founderId++) {
-      const region = regions[Math.floor(Math.random() * regions.length)];
-      const stage = stages[Math.floor(Math.random() * stages.length)];
-      const domain = domains[Math.floor(Math.random() * domains.length)];
-      const funded = Math.random() > 0.35; // ~65% funding rate
+      // Select region based on realistic distribution
+      const rand = Math.random();
+      let region: Region;
+      if (rand < 0.524) region = 'bay_area';
+      else if (rand < 0.762) region = 'nyc';
+      else if (rand < 0.893) region = 'boston';
+      else region = 'la';
+
+      // Select domain based on regional preferences
+      const domainRand = Math.random();
+      const domainPref = domainPreferences[region];
+      let domain: Domain;
+      if (domainRand < domainPref.ai) domain = 'ai';
+      else if (domainRand < domainPref.ai + domainPref.bio) domain = 'bio';
+      else if (domainRand < domainPref.ai + domainPref.bio + domainPref.consumer) domain = 'consumer';
+      else domain = 'enterprise';
+
+      // Stage distribution (realistic mix)
+      const stageRand = Math.random();
+      let stage: Stage;
+      if (stageRand < 0.25) stage = 'seed';
+      else if (stageRand < 0.60) stage = 'series_a';
+      else stage = 'series_b_plus';
+
+      const funded = Math.random() > 0.33; // ~67% funding rate
       const lead = funded && Math.random() > 0.25;
       const syndication = funded && !lead;
+
+      // Generate traits that vary by region
+      const charisma = region === 'bay_area' || region === 'la'
+        ? Math.random() * 3 - 0.5  // Higher charisma in Bay/LA
+        : Math.random() * 3 - 1.5;  // Lower in NYC/Boston
+
+      const vision = region === 'bay_area'
+        ? Math.random() * 3 - 0.3   // Highest vision in Bay
+        : Math.random() * 3 - 1.2;
+
+      const revenue = region === 'nyc'
+        ? Math.exp(Math.random() * 3 + 15)  // Higher revenue in NYC
+        : Math.exp(Math.random() * 3 + 13);
 
       const run: FounderRun = {
         seed: 42 + runId,
@@ -147,13 +193,13 @@ export function getMockRuns(filter?: RunFilter): FounderRun[] {
         funded,
         lead,
         syndication,
-        dollars: funded ? Math.random() * 20 + 5 : 0,
+        dollars: funded ? (stage === 'seed' ? Math.random() * 3 + 1.5 : stage === 'series_a' ? Math.random() * 10 + 8 : Math.random() * 25 + 20) : 0,
         score: Math.random() * 100,
         prob: funded ? Math.random() * 0.5 + 0.5 : Math.random() * 0.3,
-        revenue: Math.exp(Math.random() * 15 + 5),
+        revenue,
         growth: Math.random() * 2 - 0.5,
-        charisma: Math.random() * 4 - 2,
-        vision: Math.random() * 4 - 2,
+        charisma,
+        vision,
         traction_quality: Math.random() * 2 - 0.5,
         repeat_founder: Math.random() > 0.7,
         geo_flex: Math.random() * 2 - 0.5,

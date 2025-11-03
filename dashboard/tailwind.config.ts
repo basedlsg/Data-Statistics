@@ -61,6 +61,10 @@ const config: Config = {
       transitionDuration: {
         DEFAULT: '150ms',
       },
+      animation: {
+        'spin': 'spin 1s linear infinite',
+        'bounce': 'bounce 1s infinite',
+      },
     },
   },
   plugins: [],

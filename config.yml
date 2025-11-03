@@ -9,7 +9,7 @@ simulation:
   stochastic_checks: true  # Sample lognormal check sizes with domain multipliers
   use_score_per_dollar: true  # Rank deals by score-per-dollar efficiency
   syndication_rate: 0.25  # Probability that deals have co-investors (25% of deals)
-  budget_scale_factor: 0.05  # Simulation represents 5% of annual VC activity (realistic scarcity)
+  budget_scale_factor: 0.004  # Simulation represents 0.4% of annual VC activity (very tight constraints)
 
 # Hype(t) Markov Chain States
 hype_states:

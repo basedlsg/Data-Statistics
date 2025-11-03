@@ -9,8 +9,8 @@ regions:
   bay_area:
     name: "San Francisco Bay Area"
     # Includes: SF, San Jose, Oakland, Peninsula, South Bay
-    budget_share: 0.44  # Bay Area ≈42–45% of US VC (PitchBook–NVCA Q4'24 / CBRE 2024)
-    annual_capital_bn: 90.0  # Billions USD (2023-2024 estimate)
+    budget_share: 0.524  # Bay Area ≈42–45% of US VC, normalized to 4-region sim (was 0.44)
+    annual_capital_bn: 104.8  # Billions USD, consistent with 52.4% of $200B total
 
     # Feature weights for scoring function
     weights:
@@ -65,8 +65,8 @@ regions:
 
   nyc:
     name: "New York City"
-    budget_share: 0.20  # NYC ≈18–22% (Carta 2024; NVCA Q4'24)
-    annual_capital_bn: 40.0
+    budget_share: 0.238  # NYC ≈18–22%, normalized to 4-region sim (was 0.20)
+    annual_capital_bn: 47.6  # Billions USD, consistent with 23.8% of $200B total
 
     weights:
       revenue: 1.4         # NYC values revenue highly
@@ -114,8 +114,8 @@ regions:
 
   boston:
     name: "Boston/Cambridge"
-    budget_share: 0.11  # Boston ≈10–12% (NVCA Q4'24)
-    annual_capital_bn: 30.0
+    budget_share: 0.131  # Boston ≈10–12%, normalized to 4-region sim (was 0.11)
+    annual_capital_bn: 26.2  # Billions USD, consistent with 13.1% of $200B total
 
     weights:
       revenue: 1.1
@@ -163,8 +163,8 @@ regions:
 
   la:
     name: "Los Angeles"
-    budget_share: 0.09  # LA ≈8–10% (PitchBook hub reports 2024)
-    annual_capital_bn: 20.0
+    budget_share: 0.107  # LA ≈8–10%, normalized to 4-region sim (was 0.09)
+    annual_capital_bn: 21.4  # Billions USD, consistent with 10.7% of $200B total
 
     weights:
       revenue: 0.8

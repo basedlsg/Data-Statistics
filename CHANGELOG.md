@@ -5,7 +5,63 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added - 2025-11-03
+### CRITICAL FIX - 2025-11-03 (Later)
+
+#### Fixed: Multiple Funding Bug (400% Funding Rate)
+**BREAKING CHANGE**: Completely rewrote allocation algorithm to fix critical architectural flaw.
+
+**The Problem:**
+- Original simulation funded EVERY founder by ALL 4 regions simultaneously
+- Result: 200 founders × 4 regions = 800 "funded" entries (400% funding rate)
+- Completely unrealistic: a founder raising from Bay Area + NYC + Boston + LA in same round
+- Made all research questions meaningless (no regional competition, no budget constraints)
+
+**The Solution: Competitive Allocation with Lead Investors**
+- **One lead investor per founder** (exclusive): Founders now go to highest-scoring region only
+- **Optional syndication** (25% of deals): 2nd/3rd highest scorers can co-invest (35% of round)
+- **Realistic competition**: Regions compete for founders, winner takes deal
+- **Budget constraints bind**: Hot deals allocated first, regions run out of capital
+
+**New Architecture:**
+1. Score all founders by all regions
+2. Sort founders by "market heat" (max score across regions)
+3. For each founder (hottest first):
+   - Find highest-scoring region with budget
+   - That region becomes lead (pays 65% of round)
+   - Optional: 2nd/3rd scorers co-invest (split remaining 35%)
+4. Mark founder as funded (prevents double-funding)
+5. Continue until budgets exhausted
+
+**Code Changes:**
+- `Founder` dataclass:
+  - Added `lead_investor`, `syndicate`, `total_funding_amount`
+  - Added `is_funded` property for exclusivity checks
+  - Removed single `funded_by` field (replaced with lead + syndicate model)
+- `Simulation._competitive_allocation()`: NEW method implementing competitive auction
+- `Simulation.run_single_simulation()`: Now calls competitive allocation instead of per-region loop
+- `config.yml`: Added `syndication_rate: 0.25` parameter
+
+**Tests:**
+- `test_no_multiple_funding_exclusivity()`: Verifies no founder funded multiple times
+- `test_realistic_regional_distribution()`: Verifies allocation matches budget shares (44/20/11/9)
+- Both tests would FAIL on old code (detected 400% bug)
+
+**Expected Outcomes:**
+- Funding rate: 40-80% (not 400%)
+- Bay Area: ~44% of deals (matches budget share)
+- NYC: ~20% of deals
+- Boston: ~11% of deals
+- LA: ~9% of deals
+- Syndication: ~25% of deals have co-investors
+
+**Impact:**
+- ✅ FIXES: Multiple funding bug (the entire simulation was broken)
+- ✅ FIXES: Unrealistic 400% funding rate → realistic 40-80%
+- ✅ FIXES: Flat regional distributions → budget-proportional allocations
+- ✅ ENABLES: Meaningful analysis of regional preferences and hype effects
+- ⚠️ BREAKING: Results incompatible with previous runs (which were invalid)
+
+### Added - 2025-11-03 (Earlier)
 
 #### Major Enhancements: Realistic Deal Economics
 - **Stochastic check sizes**: Lognormal sampling with domain multipliers

@@ -8,6 +8,7 @@ simulation:
   output_dir: "results/"
   stochastic_checks: true  # Sample lognormal check sizes with domain multipliers
   use_score_per_dollar: true  # Rank deals by score-per-dollar efficiency
+  syndication_rate: 0.25  # Probability that deals have co-investors (25% of deals)
 
 # Hype(t) Markov Chain States
 hype_states:

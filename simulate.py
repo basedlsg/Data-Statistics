@@ -72,13 +72,39 @@ class Founder:
 
     # Scores by region (computed during simulation)
     scores: Dict[str, float] = field(default_factory=dict)
-    funded_by: str | None = None  # Which region funded this founder (if any)
+
+    # Funding information (NEW: supports lead + syndicate)
+    lead_investor: str | None = None  # Region that led the round
+    syndicate: Dict[str, float] = field(default_factory=dict)  # {region: amount} for co-investors
     funding_stage: Stage | None = None
-    funding_amount: float = 0.0
+    total_funding_amount: float = 0.0
+
+    @property
+    def is_funded(self) -> bool:
+        """Check if founder has been funded."""
+        return self.lead_investor is not None
+
+    @property
+    def all_investors(self) -> List[str]:
+        """Get list of all investors (lead + syndicate)."""
+        if not self.is_funded:
+            return []
+        return [self.lead_investor] + list(self.syndicate.keys())
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary for export."""
-        return asdict(self)
+        d = asdict(self)
+        # Add computed fields
+        d['is_funded'] = self.is_funded
+        d['all_investors'] = self.all_investors
+        # Add lead investment amount for CSV compatibility
+        if self.is_funded:
+            d['funding_amount'] = self.total_funding_amount * 0.65  # Lead pays 65%
+        else:
+            d['funding_amount'] = 0.0
+        # Deprecated field for backward compatibility
+        d['funded_by'] = self.lead_investor
+        return d
 
 
 @dataclass
@@ -437,6 +463,152 @@ class Simulation:
         # Store for robustness analysis
         self.robustness_regions = regions_data.get("robustness_regions", {})
 
+    def _assign_stage(self, founder: Founder) -> Stage:
+        """
+        Assign funding stage based on founder characteristics.
+
+        Simple heuristic:
+        - Seed: revenue < $500K
+        - Series A: $500K <= revenue < $5M
+        - Series B+: revenue >= $5M
+        """
+        if founder.revenue < 500_000:
+            return "seed"
+        elif founder.revenue < 5_000_000:
+            return "series_a"
+        else:
+            return "series_b_plus"
+
+    def _competitive_allocation(
+        self,
+        founders: List[Founder],
+        hype_chain: HypeMarkovChain,
+        rng: np.random.Generator
+    ) -> Dict[str, Any]:
+        """
+        Competitive allocation: founders go to highest-scoring region (lead investor).
+        Optional syndication: other regions can co-invest.
+
+        Args:
+            founders: List of founder agents
+            hype_chain: Hype Markov chain for scoring
+            rng: Random number generator
+
+        Returns:
+            Dict with region allocations and statistics
+        """
+        # Step 1: Score all founders by all regions
+        all_scores = {}  # {region_key: {founder_id: score}}
+        for region_key, region_config in self.regions.items():
+            scorer = RegionalScorer(region_config, hype_chain, self.config, rng)
+            scored = scorer.score_all_founders(founders)
+
+            # Store scores in founder objects and dict
+            all_scores[region_key] = {}
+            for founder, score in scored:
+                founder.scores[region_key] = score
+                all_scores[region_key][founder.id] = score
+
+        # Step 2: Initialize regional budgets
+        budgets = {}
+        for region_key, region_config in self.regions.items():
+            budgets[region_key] = {
+                "seed": region_config.get_stage_budget("seed"),
+                "series_a": region_config.get_stage_budget("series_a"),
+                "series_b_plus": region_config.get_stage_budget("series_b_plus")
+            }
+
+        # Step 3: Sort founders by "market heat" (max score across all regions)
+        founders_by_heat = sorted(
+            founders,
+            key=lambda f: max(all_scores[r][f.id] for r in all_scores.keys()),
+            reverse=True
+        )
+
+        # Step 4: Competitive allocation (hottest deals first)
+        syndication_rate = self.config["simulation"].get("syndication_rate", 0.25)
+
+        for founder in founders_by_heat:
+            if founder.is_funded:
+                continue  # Skip if already funded
+
+            stage = self._assign_stage(founder)
+
+            # Find lead investor: highest-scoring region with sufficient budget
+            lead_candidates = []
+            for region_key in all_scores.keys():
+                score = all_scores[region_key][founder.id]
+                region_data = self.regions_data["regions"][region_key]
+
+                # Sample check size
+                if self.config["simulation"].get("stochastic_checks", False):
+                    check_size = sample_check_size(region_data, stage, founder.domain, rng)
+                else:
+                    check_size = self.regions[region_key].check_sizes[stage]
+
+                # Check if region has budget
+                if budgets[region_key][stage] >= check_size * 0.65:  # Lead pays 65%
+                    lead_candidates.append((region_key, score, check_size))
+
+            if not lead_candidates:
+                continue  # No region can afford this founder
+
+            # Winner: highest score
+            lead_candidates.sort(key=lambda x: x[1], reverse=True)
+            lead_region, lead_score, total_check_size = lead_candidates[0]
+
+            # Lead invests 65% of round
+            lead_amount = total_check_size * 0.65
+            budgets[lead_region][stage] -= lead_amount
+
+            # Fund the founder
+            founder.lead_investor = lead_region
+            founder.funding_stage = stage
+            founder.total_funding_amount = total_check_size
+
+            # Step 5: Optional syndication (25% of deals by default)
+            if rng.random() < syndication_rate and len(lead_candidates) > 1:
+                # Remaining amount to syndicate (35% of round)
+                syndicate_amount = total_check_size * 0.35
+
+                # Find co-investors (2nd and 3rd highest scorers, excluding lead)
+                co_investor_candidates = [
+                    (r, s, cs) for r, s, cs in lead_candidates
+                    if r != lead_region
+                ][:2]  # Max 2 co-investors
+
+                if co_investor_candidates:
+                    # Split syndicate amount among co-investors
+                    per_co_investor = syndicate_amount / len(co_investor_candidates)
+
+                    for co_region, co_score, co_check in co_investor_candidates:
+                        if budgets[co_region][stage] >= per_co_investor:
+                            founder.syndicate[co_region] = per_co_investor
+                            budgets[co_region][stage] -= per_co_investor
+
+        # Step 6: Aggregate results by region
+        region_allocations = {}
+        for region_key in self.regions.keys():
+            # Count deals led
+            led_deals = [f for f in founders if f.lead_investor == region_key]
+
+            # Count co-investments
+            co_investments = [f for f in founders if region_key in f.syndicate]
+
+            # Total capital deployed
+            total_allocated = sum(f.total_funding_amount * 0.65 for f in led_deals)
+            total_allocated += sum(f.syndicate[region_key] for f in co_investments)
+
+            region_allocations[region_key] = {
+                "deals_led": len(led_deals),
+                "co_investments": len(co_investments),
+                "total_deals": len(led_deals) + len(co_investments),
+                "total_allocated_m": total_allocated,
+                "funded_founders": [f.to_dict() for f in led_deals]  # Only report deals led
+            }
+
+        return region_allocations
+
     def run_single_simulation(self, seed: int) -> Dict[str, Any]:
         """
         Run a single simulation with given random seed.
@@ -460,41 +632,19 @@ class Simulation:
         founder_gen = FounderGenerator(self.config, rng)
         founders = founder_gen.generate_founders(n_founders)
 
-        # Score founders for each region
-        region_allocations = {}
-        all_funded = []
+        # NEW: Competitive allocation (founders go to highest-scoring region)
+        region_allocations = self._competitive_allocation(founders, hype_chain, rng)
 
-        for region_key, region_config in self.regions.items():
-            # Create scorer
-            scorer = RegionalScorer(region_config, hype_chain, self.config, rng)
-
-            # Score all founders for this region
-            scored = scorer.score_all_founders(founders)
-
-            # Store scores in founder objects
-            for founder, score in scored:
-                founder.scores[region_key] = score
-
-            # Allocate capital
-            region_data = self.regions_data["regions"][region_key]
-            allocator = CapitalAllocator(region_config, region_data, self.config, rng)
-            funded, total_allocated = allocator.allocate(scored)
-
-            region_allocations[region_key] = {
-                "funded_count": len(funded),
-                "total_allocated_m": total_allocated,
-                "funded_founders": [f.to_dict() for f in funded]
-            }
-
-            all_funded.extend(funded)
+        # Count unique funded founders
+        funded_founders = [f for f in founders if f.is_funded]
 
         # Compute summary statistics
         results = {
             "seed": seed,
             "hype_state": hype_chain.current_state,
             "n_founders": n_founders,
-            "n_funded": len(all_funded),
-            "funding_rate": len(all_funded) / n_founders,
+            "n_funded": len(funded_founders),
+            "funding_rate": len(funded_founders) / n_founders,
             "regions": region_allocations,
             "all_founders": [f.to_dict() for f in founders]
         }

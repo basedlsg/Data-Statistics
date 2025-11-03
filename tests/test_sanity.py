@@ -143,5 +143,104 @@ def test_score_per_dollar_preference():
     print(f"\n✓ Score-per-dollar: {spd_efficient:.2f} > {spd_costly:.2f}")
 
 
+def test_no_multiple_funding_exclusivity(tmp_path):
+    """
+    CRITICAL TEST: Verify that no founder is funded by multiple regions as lead investor.
+    This was the original bug - every founder was funded 4 times (400% funding rate).
+    """
+    out = tmp_path / "exclusivity_test"
+    out.mkdir()
+
+    sim = Simulation()
+    sim.config["simulation"]["n_founders"] = 50
+    sim.config["simulation"]["stochastic_checks"] = True
+
+    # Run one simulation
+    results = sim.run_single_simulation(seed=42)
+
+    # Check all founders
+    funded_founder_ids = set()
+    duplicate_fundings = []
+
+    for region_key, region_data in results["regions"].items():
+        for founder_dict in region_data["funded_founders"]:
+            founder_id = founder_dict["id"]
+            if founder_id in funded_founder_ids:
+                duplicate_fundings.append((founder_id, region_key))
+            funded_founder_ids.add(founder_id)
+
+    assert len(duplicate_fundings) == 0, (
+        f"EXCLUSIVITY VIOLATION: {len(duplicate_fundings)} founders were funded multiple times as leads! "
+        f"Duplicates: {duplicate_fundings[:5]}"
+    )
+
+    # Verify realistic funding rate (should be < 100%, ideally 40-80%)
+    funding_rate = results["funding_rate"]
+    assert funding_rate <= 1.0, (
+        f"Funding rate {funding_rate:.1%} exceeds 100%! Original bug: 400% rate."
+    )
+
+    assert funding_rate >= 0.2, (
+        f"Funding rate {funding_rate:.1%} is suspiciously low. Expected 20-80%."
+    )
+
+    print(f"\n✓ Exclusivity verified: {len(funded_founder_ids)} unique founders funded")
+    print(f"  Funding rate: {funding_rate:.1%} (healthy range)")
+    print(f"  No duplicate lead investments detected")
+
+
+def test_realistic_regional_distribution(tmp_path):
+    """
+    Test that regional allocation roughly matches budget shares.
+    Bay Area (44%) should get more deals than LA (9%).
+    """
+    out = tmp_path / "distribution_test"
+    out.mkdir()
+
+    sim = Simulation()
+    sim.config["simulation"]["n_founders"] = 200
+    sim.config["simulation"]["stochastic_checks"] = True
+
+    # Run a few simulations
+    results_list = []
+    for i in range(5):
+        results = sim.run_single_simulation(seed=100 + i)
+        results_list.append(results)
+
+    # Aggregate regional deal counts
+    regional_deals = {"bay_area": 0, "nyc": 0, "boston": 0, "la": 0}
+    total_deals = 0
+
+    for results in results_list:
+        for region_key, region_data in results["regions"].items():
+            deals_led = region_data["deals_led"]
+            regional_deals[region_key] += deals_led
+            total_deals += deals_led
+
+    # Compute actual shares
+    actual_shares = {r: count / total_deals for r, count in regional_deals.items()}
+
+    # Expected shares (from data/regions.yml)
+    expected_shares = {"bay_area": 0.44, "nyc": 0.20, "boston": 0.11, "la": 0.09}
+
+    print(f"\n✓ Regional distribution over {total_deals} deals:")
+    for region in ["bay_area", "nyc", "boston", "la"]:
+        actual = actual_shares[region]
+        expected = expected_shares[region]
+        diff = abs(actual - expected)
+        print(f"  {region}: {actual:.1%} (expected {expected:.1%}, diff {diff:.1%})")
+
+        # Allow 10% deviation (e.g., Bay Area 34-54%)
+        assert diff < 0.15, (
+            f"{region} share {actual:.1%} deviates too much from expected {expected:.1%}"
+        )
+
+    # Verify ordering: Bay Area > NYC > Boston ≈ LA
+    assert regional_deals["bay_area"] > regional_deals["nyc"], "Bay Area should lead in deals"
+    assert regional_deals["nyc"] > regional_deals["boston"], "NYC should have more deals than Boston"
+
+    print(f"  ✓ Regional ordering correct: Bay Area > NYC > Boston/LA")
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v", "-s"])

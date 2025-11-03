@@ -5,6 +5,67 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
+### Added - 2025-11-03
+
+#### Major Enhancements: Realistic Deal Economics
+- **Stochastic check sizes**: Lognormal sampling with domain multipliers
+  - Added `check_sigma` per region/stage in `data/regions.yml`
+  - Added `domain_mult` (AI, bio, consumer, enterprise cost multipliers)
+  - Implemented `sample_check_size()` helper function in `simulate.py`
+- **Score-per-dollar ranking**: Allocator now ranks by efficiency
+  - Prevents equal-cost artifacts that produced flat 25/25/25/25 splits
+  - Makes budget constraints bind realistically
+- **Updated budget shares**: Aligned to PitchBook–NVCA Q4 2024
+  - Bay Area: 44% (was 45%)
+  - NYC: 20% (unchanged)
+  - Boston: 11% (was 15%)
+  - LA: 9% (was 10%)
+- **Feature toggles** in `config.yml`:
+  - `stochastic_checks: true`
+  - `use_score_per_dollar: true`
+- **CLI flags**: `--stochastic-checks`, `--score-per-dollar`
+- **Sanity tests** in `tests/test_sanity.py`:
+  - Budget shares sum to ~1.0
+  - Funded counts show regional variation (not flat)
+  - Stochastic check sizes produce realistic variance
+  - Score-per-dollar prefers efficient deals
+
+#### Documentation Updates
+- Updated `paper/main.md` with precise U.S. data language
+  - Added "Data Sources and Construction" section (§2.3)
+  - Anchored to PitchBook–NVCA Q4 2024, Carta 2024, CBRE 2024
+  - Updated regional budget shares in table
+- Updated `appendix/sources.md`:
+  - Added "U.S. Data Sources and Equivalents" table
+  - Updated budget shares with 2024 sources
+  - Added direct links to NVCA, Carta, CBRE reports
+- Renamed `capital_share` → `budget_share` throughout codebase for clarity
+
+#### Code Changes
+- `simulate.py`:
+  - Added `sample_check_size()` function with lognormal sampling
+  - Updated `RegionConfig` dataclass: added `check_sigma`, `domain_mult` fields
+  - Updated `CapitalAllocator.__init__()`: accepts `region_data`, `config`
+  - Updated `CapitalAllocator.allocate()`: implements score-per-dollar sorting
+  - Added `--stochastic-checks` and `--score-per-dollar` CLI flags
+- `data/regions.yml`:
+  - Added `check_sigma` dict for all regions (seed/A/B+ variance)
+  - Added `domain_mult` dict for domain-specific cost multipliers
+  - Updated `budget_share` values to 2024 estimates
+  - Updated `meta` section with 2024 sources
+- `config.yml`:
+  - Added `stochastic_checks: true` to simulation config
+  - Added `use_score_per_dollar: true` to simulation config
+
+### Fixed
+- Budget shares now accurately reflect PitchBook–NVCA Q4 2024 data
+- Eliminated artificial flat funding distributions across regions
+- Check sizes now vary realistically by domain and random draws
+
+### Changed
+- Allocation ranking: score-per-dollar (efficiency) vs. raw score
+- Regional parsing: reads `budget_share` instead of `capital_share`
+
 ### Added - 2025-11-02
 - Initial repository structure with Ancient Egyptian agent system
 - CLAUDE.md with project context, agent roles, and specifications

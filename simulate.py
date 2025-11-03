@@ -9,12 +9,45 @@ Models how market sentiment affects funding decisions across Bay Area, NYC, Bost
 
 import argparse
 import json
+import math
 from dataclasses import dataclass, field, asdict
 from pathlib import Path
 from typing import Dict, List, Literal, Tuple, Any
 import numpy as np
 import pandas as pd
 import yaml
+
+
+def sample_check_size(
+    region_cfg: Dict[str, Any],
+    stage: str,
+    domain: str,
+    rng: np.random.Generator
+) -> float:
+    """
+    Returns a single deal cost (in USD millions) drawn from a lognormal
+    with mean approximately = check_sizes[stage] * domain_mult[domain].
+
+    Args:
+        region_cfg: Region configuration dict with check_sizes, check_sigma, domain_mult
+        stage: Funding stage (seed, series_a, series_b_plus)
+        domain: Company domain (ai, bio, consumer, enterprise)
+        rng: NumPy random number generator
+
+    Returns:
+        Deal cost in millions USD
+    """
+    base_mean = float(region_cfg["check_sizes"][stage])
+    sigma = float(region_cfg.get("check_sigma", {}).get(stage, 0.3))
+    dmult = float(region_cfg.get("domain_mult", {}).get(domain, 1.0))
+
+    target_mean = base_mean * dmult
+    # Convert target mean + sigma to mu for lognormal:
+    # mean = exp(mu + 0.5*sigma^2) -> mu = ln(mean) - 0.5*sigma^2
+    mu = math.log(max(1e-6, target_mean)) - 0.5 * (sigma ** 2)
+    # NumPy's lognormal uses mu, sigma on natural log scale
+    val = rng.lognormal(mu, sigma)
+    return max(0.1, val)  # floor to avoid zeros
 
 
 # Type aliases
@@ -53,13 +86,15 @@ class RegionConfig:
     """Configuration for a VC region/ecosystem."""
 
     name: str
-    capital_share: float
+    budget_share: float  # Renamed from capital_share
     annual_capital_bn: float
     weights: Dict[str, float]  # Feature weights for scoring
     domain_preferences: Dict[str, float]  # Domain multipliers
     hype_beta: float  # Hype sensitivity
     stage_mix: Dict[str, float]  # Proportion of capital by stage
     check_sizes: Dict[str, float]  # Average check size by stage (millions)
+    check_sigma: Dict[str, float] = field(default_factory=dict)  # Lognormal sigma by stage
+    domain_mult: Dict[str, float] = field(default_factory=dict)  # Domain cost multipliers
 
     def get_stage_budget(self, stage: Stage) -> float:
         """Get budget for a specific stage (in millions)."""
@@ -264,15 +299,25 @@ class RegionalScorer:
 class CapitalAllocator:
     """Allocates capital via greedy algorithm subject to budget constraints."""
 
-    def __init__(self, region_config: RegionConfig, rng: np.random.Generator):
+    def __init__(
+        self,
+        region_config: RegionConfig,
+        region_data: Dict[str, Any],
+        config: Dict[str, Any],
+        rng: np.random.Generator
+    ):
         """
         Initialize capital allocator.
 
         Args:
             region_config: Configuration for this region
+            region_data: Raw region data dict (for stochastic checks)
+            config: Global simulation config
             rng: Random number generator
         """
         self.region = region_config
+        self.region_data = region_data
+        self.config = config
         self.rng = rng
 
     def allocate(
@@ -295,11 +340,37 @@ class CapitalAllocator:
         }
         total_allocated = 0.0
 
+        # Prepare candidates with check sizes and score-per-dollar
+        candidates = []
         for founder, score in scored_founders:
-            # Assign stage based on revenue (simple heuristic)
             stage = self._assign_stage(founder)
-            check_size = self.region.check_sizes[stage]
 
+            # Sample stochastic check size if enabled
+            if self.config["simulation"].get("stochastic_checks", False):
+                check_size = sample_check_size(
+                    self.region_data,
+                    stage,
+                    founder.domain,
+                    self.rng
+                )
+            else:
+                check_size = self.region.check_sizes[stage]
+
+            candidates.append((founder, score, check_size, stage))
+
+        # Sort by score-per-dollar if enabled, otherwise by raw score
+        if self.config["simulation"].get("use_score_per_dollar", False):
+            def spd_key(item):
+                founder, score, check_size, stage = item
+                cost = max(1e-6, check_size)
+                return (score / cost, score)  # Primary: efficiency, tie-break: raw score
+            candidates.sort(key=spd_key, reverse=True)
+        else:
+            # Already sorted by score, but re-sort with check_size info
+            candidates.sort(key=lambda x: x[1], reverse=True)
+
+        # Allocate
+        for founder, score, check_size, stage in candidates:
             # Check if budget available
             if budgets[stage] >= check_size:
                 founder.funded_by = self.region.name
@@ -347,17 +418,20 @@ class Simulation:
 
         # Parse region configs (only main 4 regions for MVP)
         self.regions = {}
+        self.regions_data = regions_data  # Store for later use
         for region_key in ["bay_area", "nyc", "boston", "la"]:
             r = regions_data["regions"][region_key]
             self.regions[region_key] = RegionConfig(
                 name=r["name"],
-                capital_share=r["capital_share"],
+                budget_share=r["budget_share"],
                 annual_capital_bn=r["annual_capital_bn"],
                 weights=r["weights"],
                 domain_preferences=r["domain_preferences"],
                 hype_beta=r["hype_beta"],
                 stage_mix=r["stage_mix"],
-                check_sizes=r["check_sizes"]
+                check_sizes=r["check_sizes"],
+                check_sigma=r.get("check_sigma", {}),
+                domain_mult=r.get("domain_mult", {})
             )
 
         # Store for robustness analysis
@@ -402,7 +476,8 @@ class Simulation:
                 founder.scores[region_key] = score
 
             # Allocate capital
-            allocator = CapitalAllocator(region_config, rng)
+            region_data = self.regions_data["regions"][region_key]
+            allocator = CapitalAllocator(region_config, region_data, self.config, rng)
             funded, total_allocated = allocator.allocate(scored)
 
             region_allocations[region_key] = {
@@ -538,11 +613,28 @@ def main():
         default="data/regions.yml",
         help="Path to regions data (default: data/regions.yml)"
     )
+    parser.add_argument(
+        "--stochastic-checks",
+        action="store_true",
+        help="Sample lognormal check sizes with domain multipliers"
+    )
+    parser.add_argument(
+        "--score-per-dollar",
+        action="store_true",
+        help="Rank deals by score-per-dollar efficiency"
+    )
 
     args = parser.parse_args()
 
     # Run simulation
     sim = Simulation(config_path=args.config, regions_path=args.regions)
+
+    # Override config with CLI flags if provided
+    if args.stochastic_checks:
+        sim.config["simulation"]["stochastic_checks"] = True
+    if args.score_per_dollar:
+        sim.config["simulation"]["use_score_per_dollar"] = True
+
     df = sim.run_multiple_simulations(
         n_runs=args.runs,
         base_seed=args.seed,

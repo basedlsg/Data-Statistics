@@ -91,14 +91,18 @@ Each region r has:
 
 #### Regional Profiles (Stylized)
 
-| Region | Capital Share | Hype β | Key Preferences |
-|--------|---------------|--------|-----------------|
-| **Bay Area** | 45% | 1.5 | ↑ vision, charisma, AI/infra, pre-revenue tolerance |
+| Region | Budget Share | Hype β | Key Preferences |
+|--------|--------------|--------|-----------------|
+| **Bay Area** | 44% | 1.5 | ↑ vision, charisma, AI/infra, pre-revenue tolerance |
 | **NYC** | 20% | 0.8 | ↑ revenue, enterprise/fintech, moderate risk |
-| **Boston** | 15% | 0.5 | ↑ bio/deeptech, science signals, conservative |
-| **LA** | 10% | 1.3 | ↑ consumer/media, brand/story, narrative-driven |
+| **Boston** | 11% | 0.5 | ↑ bio/deeptech, science signals, conservative |
+| **LA** | 9% | 1.3 | ↑ consumer/media, brand/story, narrative-driven |
 
 Full weights in `data/regions.yml`. Sources: PitchBook, NVCA, ecosystem surveys (see Appendix).
+
+#### Data Sources and Construction
+
+Regional venture-capital budget shares are anchored to U.S. private-market metro distributions reported by the PitchBook–NVCA Venture Monitor (Q4 2024). We cross-check directional magnitudes with Carta's State of Private Markets (2024) and CBRE's 2024 metro analyses. In our configuration, the Bay Area, New York, Boston, and Los Angeles metros receive approximately 44%, 20%, 11%, and 9% of national VC dollars, respectively. Exact transcribed metro figures are recorded in `data/regions.yml` and Appendix A; all simulations are reproducible and parameterized by these public benchmarks.
 
 ### 2.4 Hype(t) Markov Chain
 

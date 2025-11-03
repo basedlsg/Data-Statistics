@@ -52,17 +52,33 @@ This appendix documents all data sources, estimates, and references used in the 
    - Access: Public report
    - **Figures used**: Bay Area AI/infra preference
 
-### Summary: Regional Capital Shares (2023-2024 Estimates)
+### Summary: Regional Capital Shares (2024 Estimates)
 
-| Region | Capital Share | Annual Capital (est.) | Primary Source |
-|--------|---------------|----------------------|----------------|
-| **Bay Area** | ~45% | $90B | PitchBook Q4 2023 |
-| **NYC** | ~20% | $40B | PitchBook Q4 2023, NVCA 2024 |
-| **Boston** | ~15% | $30B | MassTech VC Report, NVCA 2024 |
-| **LA** | ~10% | $20B | PitchBook LA Market Report 2023 |
-| **Other (Seattle, Austin, etc.)** | ~10% | $20B | NVCA 2024 aggregate |
+| Region | Budget Share | Annual Capital (est.) | Primary Source |
+|--------|--------------|----------------------|----------------|
+| **Bay Area** | ~44% | $90B | PitchBook–NVCA Q4 2024, CBRE 2024 |
+| **NYC** | ~20% | $40B | PitchBook–NVCA Q4 2024, Carta 2024 |
+| **Boston** | ~11% | $30B | MassTech VC Report, NVCA Q4 2024 |
+| **LA** | ~9% | $20B | PitchBook LA Market Report 2024 |
+| **Other (Seattle, Austin, etc.)** | ~16% | $32B | NVCA 2024 aggregate |
 
-**Note**: These are estimates based on publicly disclosed data. Total US VC deployed in 2023 was approximately $200B (down from $350B in 2021 peak). Regional shares are approximations; exact figures require PitchBook API access or proprietary datasets.
+**Note**: These are estimates based on publicly disclosed data. Total US VC deployed in 2024 was approximately $212B. Regional shares are approximations; exact figures require PitchBook API access or proprietary datasets.
+
+### U.S. Data Sources and Equivalents
+
+| Dataset | Purpose | U.S. Equivalent | Notes |
+|---------|---------|-----------------|-------|
+| Venture market totals by metro | Budget shares per region | PitchBook–NVCA Venture Monitor (Q4 2024) | Canonical U.S. private-market benchmark |
+| City/metro narrative | Cross-check metro hierarchy | CBRE U.S. Tech Insights (2024) | Confirms Bay Area dominance |
+| Deal activity context | Directional validation | Carta State of Private Markets (2024) | NYC #2, overall mix |
+| Historical case studies | Hype cycle exemplars | Crunchbase, SEC filings, news archives | Theranos, WeWork, Quibi, etc. |
+| Stage distribution & check sizes | Funding patterns by stage | NVCA 2024 Yearbook, PitchBook stage reports | Seed, Series A, B+ distributions |
+
+**Key U.S. Sources:**
+- **PitchBook–NVCA Venture Monitor Q4 2024**: https://pitchbook.com/news/reports/q4-2024-pitchbook-nvca-venture-monitor
+- **NVCA 2024 Yearbook**: https://nvca.org/research/nvca-yearbook/
+- **Carta State of Private Markets 2024**: https://carta.com/blog/state-of-private-markets-2024/
+- **CBRE U.S. Tech Insights 2024**: https://www.cbre.com/insights/reports/us-tech-talent-report-2024
 
 ---
 

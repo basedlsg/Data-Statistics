@@ -6,6 +6,8 @@ simulation:
   n_runs: 50
   random_seed: 42
   output_dir: "results/"
+  stochastic_checks: true  # Sample lognormal check sizes with domain multipliers
+  use_score_per_dollar: true  # Rank deals by score-per-dollar efficiency
 
 # Hype(t) Markov Chain States
 hype_states:

@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { pitches, filterPitches, Domain, Stage, HypeState, Pitch } from '@/lib/data/pitches';
 import { PitchCard } from '@/components/pitch-theater/PitchCard';
 import { VCEvaluationCard } from '@/components/pitch-theater/VCEvaluationCard';
@@ -9,9 +10,13 @@ import { FilterPanel } from '@/components/pitch-theater/FilterPanel';
 import { MathBreakdown } from '@/components/pitch-theater/MathBreakdown';
 
 export default function PitchTheaterPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
   const [showMath, setShowMath] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const [filters, setFilters] = useState<{
     domain: Domain[];
     stage: Stage[];
@@ -24,26 +29,97 @@ export default function PitchTheaterPage() {
     outcome: [],
   });
 
-  // Load position from localStorage
+  // Load from URL params on mount
   useEffect(() => {
-    const saved = localStorage.getItem('pitch-theater-position');
-    if (saved) {
-      setCurrentIndex(parseInt(saved, 10));
+    const pitchId = searchParams.get('id');
+    if (pitchId) {
+      const index = pitches.findIndex(p => p.id === parseInt(pitchId, 10));
+      if (index !== -1) {
+        setCurrentIndex(index);
+      }
+    } else {
+      // Load position from localStorage if no URL param
+      const saved = localStorage.getItem('pitch-theater-position');
+      if (saved) {
+        setCurrentIndex(parseInt(saved, 10));
+      }
     }
-  }, []);
+  }, [searchParams]);
 
   // Save position to localStorage
   useEffect(() => {
     localStorage.setItem('pitch-theater-position', currentIndex.toString());
   }, [currentIndex]);
 
-  // Filter pitches
-  const filteredPitches = filterPitches(pitches, filters);
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      // Don't trigger if user is typing in an input
+      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) {
+        return;
+      }
+
+      const filteredPitches = filterPitches(pitches, filters);
+
+      switch(e.key) {
+        case 'ArrowLeft':
+          e.preventDefault();
+          if (currentIndex > 0) {
+            handleNavigate(currentIndex - 1);
+          }
+          break;
+        case 'ArrowRight':
+          e.preventDefault();
+          if (currentIndex < filteredPitches.length - 1) {
+            handleNavigate(currentIndex + 1);
+          }
+          break;
+        case 'f':
+        case 'F':
+          e.preventDefault();
+          setShowFilters(prev => !prev);
+          break;
+        case 'm':
+        case 'M':
+          e.preventDefault();
+          setShowMath(prev => !prev);
+          break;
+        case '/':
+          e.preventDefault();
+          document.getElementById('pitch-search')?.focus();
+          break;
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [currentIndex, filters]);
+
+  // Filter pitches by search query
+  let filteredPitches = filterPitches(pitches, filters);
+  if (searchQuery.trim()) {
+    const query = searchQuery.toLowerCase();
+    filteredPitches = filteredPitches.filter(
+      p =>
+        p.company.toLowerCase().includes(query) ||
+        p.founder.toLowerCase().includes(query) ||
+        p.pitch.toLowerCase().includes(query) ||
+        p.domain.toLowerCase().includes(query)
+    );
+  }
+
   const currentPitch = filteredPitches[currentIndex] || filteredPitches[0] || pitches[0];
 
   const handleNavigate = (index: number) => {
     setCurrentIndex(index);
     setShowMath(false);
+
+    // Update URL with pitch ID
+    const pitchId = filteredPitches[index]?.id;
+    if (pitchId) {
+      router.push(`/pitch-theater?id=${pitchId}`, { scroll: false });
+    }
+
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -52,12 +128,19 @@ export default function PitchTheaterPage() {
     setCurrentIndex(0); // Reset to first pitch when filters change
   };
 
+  const handleShare = () => {
+    const url = `${window.location.origin}/pitch-theater?id=${currentPitch.id}`;
+    navigator.clipboard.writeText(url).then(() => {
+      alert('Link copied to clipboard!');
+    });
+  };
+
   return (
     <div className="min-h-screen gradient-ambient pb-32">
       {/* Hero Header */}
       <div className="glass-strong border-b border-white/20 mb-8">
         <div className="max-w-7xl mx-auto px-6 py-12">
-          <div className="flex items-start justify-between">
+          <div className="flex items-start justify-between mb-6">
             <div>
               <h1 className="text-display mb-3">Pitch Theater</h1>
               <p className="text-body max-w-2xl">
@@ -65,12 +148,58 @@ export default function PitchTheaterPage() {
                 demonstrates regional preferences, scoring mechanics, and decision patterns.
               </p>
             </div>
-            <button
-              onClick={() => setShowFilters(!showFilters)}
-              className="glass-hover glass px-6 py-3 font-medium press-animation"
-            >
-              {showFilters ? 'Hide' : 'Show'} Filters
-            </button>
+            <div className="flex gap-3">
+              <button
+                onClick={handleShare}
+                className="glass-hover glass px-6 py-3 font-medium press-animation"
+                title="Share current pitch"
+              >
+                🔗 Share
+              </button>
+              <button
+                onClick={() => setShowFilters(!showFilters)}
+                className="glass-hover glass px-6 py-3 font-medium press-animation"
+              >
+                {showFilters ? 'Hide' : 'Show'} Filters
+              </button>
+            </div>
+          </div>
+
+          {/* Search Bar */}
+          <div className="glass p-4 flex items-center gap-4">
+            <div className="flex-1 relative">
+              <input
+                id="pitch-search"
+                type="text"
+                placeholder="Search pitches by company, founder, or keywords... (Press / to focus)"
+                value={searchQuery}
+                onChange={(e) => {
+                  setSearchQuery(e.target.value);
+                  setCurrentIndex(0); // Reset to first result
+                }}
+                className="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-body placeholder:text-caption focus:outline-none focus:ring-2 focus:ring-blue-500/50"
+              />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-caption hover:text-body"
+                >
+                  ✕
+                </button>
+              )}
+            </div>
+            <div className="text-caption">
+              {filteredPitches.length} {filteredPitches.length === 1 ? 'pitch' : 'pitches'}
+            </div>
+          </div>
+
+          {/* Keyboard Shortcuts Help */}
+          <div className="mt-4 glass p-3 text-caption text-sm">
+            <span className="font-semibold mr-2">Keyboard shortcuts:</span>
+            <span className="mr-4">← → Navigate</span>
+            <span className="mr-4">F Filters</span>
+            <span className="mr-4">M Math</span>
+            <span>/ Search</span>
           </div>
         </div>
       </div>

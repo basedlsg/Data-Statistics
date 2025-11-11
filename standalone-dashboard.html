@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VC Hype Simulation Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-detail {
+            font-size: 0.85em;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .chart-title {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .info-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            margin-top: 40px;
+        }
+
+        .info-section h2 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .info-section p {
+            line-height: 1.6;
+            margin-bottom: 10px;
+        }
+
+        .region-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin: 3px;
+        }
+
+        .bay-area { background: #ff6b6b; color: white; }
+        .nyc { background: #4ecdc4; color: white; }
+        .boston { background: #45b7d1; color: white; }
+        .la { background: #feca57; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>VC Hype Simulation</h1>
+            <p class="subtitle">Regional Venture Capital Allocation Analysis</p>
+        </header>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-label">Total Funded</div>
+                <div class="stat-value" id="totalFunded">-</div>
+                <div class="stat-detail">companies across 10 runs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Repeat Founders</div>
+                <div class="stat-value" id="repeatRate">-</div>
+                <div class="stat-detail">of funded companies</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">Avg Revenue</div>
+                <div class="stat-value" id="avgRevenue">-</div>
+                <div class="stat-detail">per funded company</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">AI Dominance</div>
+                <div class="stat-value" id="aiShare">-</div>
+                <div class="stat-detail">of total funding</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-container">
+                <div class="chart-title">Funding by Region</div>
+                <canvas id="regionChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Funding by Domain</div>
+                <canvas id="domainChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Funding by Stage</div>
+                <canvas id="stageChart"></canvas>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">Average Funding by Region</div>
+                <canvas id="avgFundingChart"></canvas>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <h2>Regional Investment Preferences</h2>
+            <p><span class="region-badge bay-area">Bay Area</span> Focus on vision, charisma, AI/infrastructure. High hype elasticity, tolerant of pre-revenue.</p>
+            <p><span class="region-badge nyc">NYC</span> Emphasis on revenue, enterprise/fintech. Moderate hype elasticity, fundamentals-driven.</p>
+            <p><span class="region-badge boston">Boston</span> Bio/deeptech focus, science signals, repeat founders. Low hype elasticity.</p>
+            <p><span class="region-badge la">LA</span> Consumer/media emphasis, brand and story tilt. High hype elasticity.</p>
+        </div>
+
+        <div class="info-section" style="margin-top: 20px;">
+            <h2>Simulation Parameters</h2>
+            <p>200 founder agents with multi-dimensional feature vectors (revenue, growth, charisma, vision, domain)</p>
+            <p>Scoring model: <code>score = w_region • features + β_region * Hype(t) + ε</code></p>
+            <p>Hype states: Risk-off, Normal, Hype (3-state Markov chain)</p>
+            <p>Deterministic random seeds ensure reproducibility</p>
+        </div>
+    </div>
+
+    <script>
+        // Simulation data embedded
+        const data = {
+            "total_funded": 1342,
+            "by_region": {
+                "bay_area": 625,
+                "boston": 208,
+                "la": 188,
+                "nyc": 321
+            },
+            "by_domain": {
+                "ai": 441,
+                "bio": 221,
+                "consumer": 306,
+                "enterprise": 374
+            },
+            "by_stage": {
+                "seed": 1000,
+                "series_a": 288,
+                "series_b_plus": 54
+            },
+            "avg_funding_by_region": {
+                "bay_area": 4.02,
+                "boston": 3.86,
+                "la": 3.02,
+                "nyc": 4.52
+            },
+            "repeat_founder_rate": 0.1796,
+            "avg_charisma": 0.284,
+            "avg_revenue": 1212027
+        };
+
+        // Update stats
+        document.getElementById('totalFunded').textContent = data.total_funded.toLocaleString();
+        document.getElementById('repeatRate').textContent = (data.repeat_founder_rate * 100).toFixed(1) + '%';
+        document.getElementById('avgRevenue').textContent = '$' + (data.avg_revenue / 1000000).toFixed(2) + 'M';
+        document.getElementById('aiShare').textContent = ((data.by_domain.ai / data.total_funded) * 100).toFixed(1) + '%';
+
+        // Chart colors
+        const colors = {
+            bay_area: '#ff6b6b',
+            nyc: '#4ecdc4',
+            boston: '#45b7d1',
+            la: '#feca57',
+            ai: '#667eea',
+            bio: '#48bb78',
+            consumer: '#f56565',
+            enterprise: '#4299e1',
+            seed: '#38b2ac',
+            series_a: '#805ad5',
+            series_b_plus: '#d69e2e'
+        };
+
+        // Region Chart
+        new Chart(document.getElementById('regionChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Bay Area', 'NYC', 'Boston', 'LA'],
+                datasets: [{
+                    data: [
+                        data.by_region.bay_area,
+                        data.by_region.nyc,
+                        data.by_region.boston,
+                        data.by_region.la
+                    ],
+                    backgroundColor: [
+                        colors.bay_area,
+                        colors.nyc,
+                        colors.boston,
+                        colors.la
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Domain Chart
+        new Chart(document.getElementById('domainChart'), {
+            type: 'bar',
+            data: {
+                labels: ['AI', 'Bio', 'Consumer', 'Enterprise'],
+                datasets: [{
+                    label: 'Companies Funded',
+                    data: [
+                        data.by_domain.ai,
+                        data.by_domain.bio,
+                        data.by_domain.consumer,
+                        data.by_domain.enterprise
+                    ],
+                    backgroundColor: [
+                        colors.ai,
+                        colors.bio,
+                        colors.consumer,
+                        colors.enterprise
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Stage Chart
+        new Chart(document.getElementById('stageChart'), {
+            type: 'pie',
+            data: {
+                labels: ['Seed', 'Series A', 'Series B+'],
+                datasets: [{
+                    data: [
+                        data.by_stage.seed,
+                        data.by_stage.series_a,
+                        data.by_stage.series_b_plus
+                    ],
+                    backgroundColor: [
+                        colors.seed,
+                        colors.series_a,
+                        colors.series_b_plus
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Average Funding Chart
+        new Chart(document.getElementById('avgFundingChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Bay Area', 'NYC', 'Boston', 'LA'],
+                datasets: [{
+                    label: 'Avg Funding ($M)',
+                    data: [
+                        data.avg_funding_by_region.bay_area,
+                        data.avg_funding_by_region.nyc,
+                        data.avg_funding_by_region.boston,
+                        data.avg_funding_by_region.la
+                    ],
+                    backgroundColor: [
+                        colors.bay_area,
+                        colors.nyc,
+                        colors.boston,
+                        colors.la
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Average Funding ($M)'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VC Hype Simulation - Dashboard Access</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.3em;
+            opacity: 0.9;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            color: #333;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 18px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-size: 1.2em;
+            font-weight: 600;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin: 10px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+
+        .ip-section {
+            background: #f7fafc;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 30px 0;
+            text-align: left;
+            border-radius: 8px;
+        }
+
+        .ip-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .ip-code {
+            background: #2d3748;
+            color: #68d391;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+            margin: 8px 0;
+            display: block;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .ip-code:hover {
+            background: #1a202c;
+        }
+
+        .copy-btn {
+            background: #48bb78;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-left: 10px;
+            transition: background 0.2s;
+        }
+
+        .copy-btn:hover {
+            background: #38a169;
+        }
+
+        .status {
+            font-size: 0.9em;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li:before {
+            content: "✓ ";
+            color: #48bb78;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: #48bb78;
+            border-radius: 50%;
+            margin-right: 8px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🚀 VC Hype Simulation</h1>
+        <p class="subtitle">Interactive Dashboard for Regional Venture Capital Analysis</p>
+
+        <div class="card">
+            <h2 style="margin-bottom: 20px;"><span class="live-indicator"></span>Dashboard is Live!</h2>
+
+            <p style="margin-bottom: 30px; font-size: 1.1em;">
+                Explore funding patterns across Bay Area, NYC, Boston, and LA ecosystems
+            </p>
+
+            <a href="/standalone-dashboard.html" class="btn">🎯 Open Dashboard</a>
+
+            <div class="ip-section">
+                <h3>🔐 IP Verification (if prompted)</h3>
+                <p style="margin-bottom: 15px;">If localtunnel asks for IP verification, use one of these:</p>
+
+                <code class="ip-code" onclick="copyIP(this)">
+                    104.155.129.177
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyText('104.155.129.177')">Copy</button>
+                </code>
+
+                <code class="ip-code" onclick="copyIP(this)">
+                    34.30.49.235
+                    <button class="copy-btn" onclick="event.stopPropagation(); copyText('34.30.49.235')">Copy</button>
+                </code>
+
+                <p style="margin-top: 15px; font-size: 0.9em; opacity: 0.8;">
+                    Click on an IP to copy it, then paste it into the verification page.
+                </p>
+            </div>
+
+            <ul class="feature-list">
+                <li>Interactive charts powered by Chart.js</li>
+                <li>Real simulation data from 200 founder agents</li>
+                <li>Regional funding breakdowns and preferences</li>
+                <li>Domain and stage analysis (AI, Bio, Consumer, Enterprise)</li>
+                <li>Responsive design - works on all devices</li>
+            </ul>
+
+            <div class="status">
+                <p><strong>Server Status:</strong> Online</p>
+                <p><strong>Port:</strong> 8000</p>
+                <p><strong>Tunnel:</strong> Localtunnel (auto-restart enabled)</p>
+            </div>
+        </div>
+
+        <p style="opacity: 0.8;">
+            Built with Claude Code | Data from VC Hype Simulation Research Project
+        </p>
+    </div>
+
+    <script>
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('IP copied to clipboard: ' + text);
+            }).catch(err => {
+                console.error('Failed to copy:', err);
+            });
+        }
+
+        function copyIP(element) {
+            const text = element.textContent.trim().split('\n')[0].trim();
+            copyText(text);
+        }
+
+        // Auto-redirect after 5 seconds (optional)
+        // setTimeout(() => {
+        //     window.location.href = '/standalone-dashboard.html';
+        // }, 5000);
+    </script>
+</body>
+</html>

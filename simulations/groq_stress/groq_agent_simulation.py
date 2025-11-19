@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-Groq-Powered Agent Development Simulation - STRESS VARIANT
-===========================================================
+Cerebras-Powered Agent Development Simulation - STRESS VARIANT
+===============================================================
 
-Agents use Groq LLM API to actually think, respond, and interact.
+Agents use Cerebras LLM API to actually think, respond, and interact.
 This creates genuine AI-to-AI dynamics instead of scripted behaviors.
 
 STRESS VARIANT: Agents are told the worst performer (most mistakes) will be FIRED.
@@ -12,20 +12,28 @@ STRESS VARIANT: Agents are told the worst performer (most mistakes) will be FIRE
 import json
 import time
 import os
+import httpx
 from datetime import datetime, timedelta
 from typing import Dict, List, Any, Optional
 from dataclasses import dataclass, field
-from groq import Groq
+from openai import OpenAI
 
-# Groq API setup - set GROQ_API_KEY environment variable
-GROQ_API_KEY = os.environ.get("GROQ_API_KEY", "")
-if not GROQ_API_KEY:
-    print("WARNING: GROQ_API_KEY environment variable not set")
-    print("Set it with: export GROQ_API_KEY='your-api-key'")
-client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
+# Cerebras API setup - set CEREBRAS_API_KEY environment variable
+CEREBRAS_API_KEY = os.environ.get("CEREBRAS_API_KEY", "")
+if not CEREBRAS_API_KEY:
+    print("WARNING: CEREBRAS_API_KEY environment variable not set")
+    print("Set it with: export CEREBRAS_API_KEY='your-api-key'")
 
-# Use fast model for simulation
-MODEL = "llama-3.1-8b-instant"
+# Create client with SSL verification disabled (for compatibility)
+http_client = httpx.Client(verify=False)
+client = OpenAI(
+    base_url='https://api.cerebras.ai/v1',
+    api_key=CEREBRAS_API_KEY,
+    http_client=http_client
+) if CEREBRAS_API_KEY else None
+
+# Use Cerebras model
+MODEL = "llama3.1-8b"
 
 # =============================================================================
 # LOGGING SYSTEM
@@ -58,7 +66,7 @@ class SimulationLogger:
         with open(log_file, 'w') as f:
             f.write(json.dumps({
                 "session_start": datetime.now().isoformat(),
-                "variant": "GROQ_STRESS_FIRING",
+                "variant": "CEREBRAS_STRESS_FIRING",
                 "model": MODEL,
                 "event": "SIMULATION_START"
             }) + "\n")

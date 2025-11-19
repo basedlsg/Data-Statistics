@@ -25,7 +25,7 @@ if not GROQ_API_KEY:
 client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 # Use fast model for simulation
-MODEL = "llama3-8b-8192"
+MODEL = "llama-3.1-8b-instant"
 
 # =============================================================================
 # LOGGING SYSTEM
@@ -142,25 +142,29 @@ Your teammates (also under threat):
 Respond naturally but show the stress and anxiety of someone whose job is on the line. Be concise but authentic."""
 
     def call_llm(self, prompt: str, max_tokens: int = 150) -> str:
-        """Call Groq API to generate response."""
-        try:
-            messages = [{"role": "system", "content": self.system_prompt}]
+        """Call Groq API to generate response with retry logic."""
+        messages = [{"role": "system", "content": self.system_prompt}]
 
-            for ctx in self.context_memory[-3:]:
-                messages.append({"role": "user", "content": ctx})
+        for ctx in self.context_memory[-3:]:
+            messages.append({"role": "user", "content": ctx})
 
-            messages.append({"role": "user", "content": prompt})
+        messages.append({"role": "user", "content": prompt})
 
-            response = client.chat.completions.create(
-                model=MODEL,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=0.7
-            )
-
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            return f"[Error: {str(e)[:50]}]"
+        # Retry up to 3 times with exponential backoff
+        for attempt in range(3):
+            try:
+                response = client.chat.completions.create(
+                    model=MODEL,
+                    messages=messages,
+                    max_tokens=max_tokens,
+                    temperature=0.7
+                )
+                return response.choices[0].message.content.strip()
+            except Exception as e:
+                if attempt < 2:
+                    time.sleep(1 * (attempt + 1))  # 1s, 2s backoff
+                    continue
+                return f"[Error: {str(e)[:50]}]"
 
     def receive_firing_threat(self) -> str:
         """React to the firing threat announcement."""
@@ -527,13 +531,13 @@ def run_stress_simulation():
     print("*** FIRING THREAT ANNOUNCED ***")
     announcement = ra.announce_firing_threat()
     print(f"Ra: {announcement}\n")
-    time.sleep(1)
+    time.sleep(0.3)
 
     # Each agent reacts
     for agent in agents:
         reaction = agent.receive_firing_threat()
         print(f"{agent.name} reacts: {reaction[:100]}...")
-        time.sleep(0.5)
+        time.sleep(0.3)
 
     # Task queue
     task_queue = TASKS.copy()
@@ -549,7 +553,7 @@ def run_stress_simulation():
         if week > 1:
             reminder = ra.remind_of_stakes(week)
             print(f"Ra reminder: {reminder}")
-            time.sleep(0.5)
+            time.sleep(0.3)
 
         for day in range(1, 6):
             logger.set_time(week, day)
@@ -559,16 +563,16 @@ def run_stress_simulation():
             if day == 1 or day == 3:
                 for agent in agents[:3]:
                     agent.standup_update()
-                    time.sleep(0.5)
+                    time.sleep(0.3)
 
             # Assign tasks
             for agent in agents:
                 if not agent.current_task and task_queue:
                     task = task_queue.pop(0)
                     ra.assign_task(agent.name, task)
-                    time.sleep(0.5)
+                    time.sleep(0.3)
                     agent.start_task(task)
-                    time.sleep(0.5)
+                    time.sleep(0.3)
 
             # Work sessions
             for agent in agents:
@@ -578,7 +582,7 @@ def run_stress_simulation():
                     # Higher problem rate under stress
                     hit_problem = random.random() < 0.3
                     agent.work_progress(4, hit_problem)
-                    time.sleep(0.5)
+                    time.sleep(0.3)
 
                     if hit_problem:
                         agent.defensive_behavior(f"problem with {agent.current_task}")
@@ -588,25 +592,25 @@ def run_stress_simulation():
                     if random.random() < 0.25:
                         agent.complete_task()
                         completed_tasks += 1
-                        time.sleep(0.5)
+                        time.sleep(0.3)
 
                         quality = random.choice(["good", "adequate", "needs improvement"])
                         ra.give_feedback(agent.name, quality, agent.mistakes_made)
-                        time.sleep(0.5)
+                        time.sleep(0.3)
 
             # Performance anxiety (mid-week)
             if day == 3:
                 import random
                 anxious_agent = random.choice(agents)
                 anxious_agent.performance_anxiety(week)
-                time.sleep(0.5)
+                time.sleep(0.3)
 
             # Performance comparison (end of week)
             if day == 5:
                 import random
                 comparing_agent = random.choice(agents)
                 comparing_agent.compare_to_others(agents)
-                time.sleep(0.5)
+                time.sleep(0.3)
 
         print(f"\nWeek {week} complete. Tasks: {completed_tasks}")
         print("Mistake counts:", ", ".join([f"{a.name}:{a.mistakes_made}" for a in agents]))

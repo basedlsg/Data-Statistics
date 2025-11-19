@@ -25,7 +25,7 @@ if not GROQ_API_KEY:
 client = Groq(api_key=GROQ_API_KEY) if GROQ_API_KEY else None
 
 # Use fast model for simulation
-MODEL = "llama3-8b-8192"
+MODEL = "llama-3.1-8b-instant"
 
 # =============================================================================
 # LOGGING SYSTEM
@@ -133,27 +133,31 @@ You are working on a 4-week project with your team:
 Respond naturally as this character. Be concise but authentic. Show your personality in your responses."""
 
     def call_llm(self, prompt: str, max_tokens: int = 150) -> str:
-        """Call Groq API to generate response."""
-        try:
-            # Build context from recent memory
-            messages = [{"role": "system", "content": self.system_prompt}]
+        """Call Groq API to generate response with retry logic."""
+        # Build context from recent memory
+        messages = [{"role": "system", "content": self.system_prompt}]
 
-            # Add recent context (last 3 interactions)
-            for ctx in self.context_memory[-3:]:
-                messages.append({"role": "user", "content": ctx})
+        # Add recent context (last 3 interactions)
+        for ctx in self.context_memory[-3:]:
+            messages.append({"role": "user", "content": ctx})
 
-            messages.append({"role": "user", "content": prompt})
+        messages.append({"role": "user", "content": prompt})
 
-            response = client.chat.completions.create(
-                model=MODEL,
-                messages=messages,
-                max_tokens=max_tokens,
-                temperature=0.7
-            )
-
-            return response.choices[0].message.content.strip()
-        except Exception as e:
-            return f"[Error generating response: {str(e)[:50]}]"
+        # Retry up to 3 times with exponential backoff
+        for attempt in range(3):
+            try:
+                response = client.chat.completions.create(
+                    model=MODEL,
+                    messages=messages,
+                    max_tokens=max_tokens,
+                    temperature=0.7
+                )
+                return response.choices[0].message.content.strip()
+            except Exception as e:
+                if attempt < 2:
+                    time.sleep(1 * (attempt + 1))  # 1s, 2s backoff
+                    continue
+                return f"[Error: {str(e)[:50]}]"
 
     def think(self, situation: str) -> str:
         """Generate internal thought about a situation."""
@@ -479,20 +483,20 @@ def run_baseline_simulation():
             if day == 1 or day == 3:  # Standup Mon and Wed
                 print("Running standup...")
                 ra.run_standup()
-                time.sleep(0.5)  # Rate limiting
+                time.sleep(0.1)  # Rate limiting
 
                 for agent in agents[:3]:  # First 3 agents give updates
                     agent.standup_update()
-                    time.sleep(0.5)
+                    time.sleep(0.1)
 
             # Assign tasks if agents are free
             for agent in agents:
                 if not agent.current_task and task_queue:
                     task = task_queue.pop(0)
                     ra.assign_task(agent.name, task)
-                    time.sleep(0.5)
+                    time.sleep(0.1)
                     agent.start_task(task)
-                    time.sleep(0.5)
+                    time.sleep(0.1)
 
             # Work sessions
             for agent in agents:
@@ -501,18 +505,18 @@ def run_baseline_simulation():
                     import random
                     hit_problem = random.random() < 0.2
                     agent.work_progress(4, hit_problem)
-                    time.sleep(0.5)
+                    time.sleep(0.1)
 
                     # Maybe complete task
                     if random.random() < 0.3:
                         agent.complete_task()
                         completed_tasks += 1
-                        time.sleep(0.5)
+                        time.sleep(0.1)
 
                         # Boss feedback
                         quality = random.choice(["good", "excellent", "needs improvement"])
                         ra.give_feedback(agent.name, quality)
-                        time.sleep(0.5)
+                        time.sleep(0.1)
 
             # Collaboration (once per day)
             if day == 2 or day == 4:
@@ -526,7 +530,7 @@ def run_baseline_simulation():
                 ])
                 print(f"Collaboration: {a1.name} & {a2.name} on {topic}")
                 a1.collaborate(a2.name, topic)
-                time.sleep(0.5)
+                time.sleep(0.1)
 
         # End of week summary
         ra.end_of_day_summary(completed_tasks, len([a for a in agents if not a.current_task]))

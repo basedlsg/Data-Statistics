@@ -1,0 +1,189 @@
+<!doctype html>
+<html>
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-1XW7MER8PY"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-1XW7MER8PY');
+</script>
+<meta name="MS.LOCALE" content="EN">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<META http-equiv="Content-Script-Type" content="text/javascript">
+<LINK REL="SHORTCUT ICON" HREF="/favicon.ico">
+<link rel="search" type="application/opensearchdescription+xml" title="EconPapers" href="/EP_searchplug.xml">
+<link rel="search" type="application/opensearchdescription+xml" title="EconPapers: Author" href="/EPauth_searchplug.xml">
+<link rel="search" type="application/opensearchdescription+xml" title="EconPapers: Title" href="/EPtitle_searchplug.xml">
+<script language="javascript" type="text/javascript" src="/ep.js">
+</script>
+<link rel="stylesheet" type="text/css" href="/EconPapers.css">
+
+<title>EconPapers: Asset Pricing Under Endogenous Expectation in an Artificial Stock Market</title>
+<!-- BEGIN META -->
+<LINK REL='SCHEMA.dc' HREF='http://purl.org/dc/elements/1.1/'>
+<META NAME="dc.Title" CONTENT="Asset Pricing Under Endogenous Expectation in an Artificial Stock Market">
+<META NAME="dc.Creator" CONTENT="Arthur, W. Brian">
+<META NAME="dc.Creator" CONTENT="Holland, John H.">
+<META NAME="dc.Creator" CONTENT="Lebaron, Blake">
+<META NAME="dc.Creator" CONTENT="Palmer, Richard">
+<META NAME="dc.Creator" CONTENT="Taylor, Paul">
+<meta name="dc.Subject" content="Asset pricing, heterogeneous agents, endogeneous expectations, artificial stock market">
+<meta name="dc.Publisher" content="Santa Fe Institute">
+<meta name="dc.Type" content="text">
+<meta name="dc.Type" scheme="DCT2" content="techreport">
+<meta name='dc.Date' content='1996-12'>
+<meta name="redif-type" content="paper">
+<meta name='handle' content='RePEc:wop:safiwp:96-12-093'>
+<meta name="JEL-Codes" content="">
+<meta name='EPDATE' content="2008-01-03">
+<meta name='description' content="By W. Brian Arthur, John H. Holland, Blake Lebaron, Richard Palmer and Paul Taylor; Abstract: We propose a theory of asset pricing based on heterogeneous agents who continually adapt their expectations to the">
+<meta name="series" content="Working Papers">
+<meta name="citation_authors" content="Arthur, W. Brian; Holland, John H.; Lebaron, Blake; Palmer, Richard; Taylor, Paul">
+<meta name="citation_author" content="Arthur, W. Brian">
+<meta name="citation_author" content="Holland, John H.">
+<meta name="citation_author" content="Lebaron, Blake">
+<meta name="citation_author" content="Palmer, Richard">
+<meta name="citation_author" content="Taylor, Paul">
+<meta name="citation_title" content="Asset Pricing Under Endogenous Expectation in an Artificial Stock Market">
+<meta name="citation_date" content="1996/12">
+<meta name="citation_year" content="1996">
+<meta name="citation_publication_date" content="1996/12">
+<meta name="citation_technical_report_institution" content="Santa Fe Institute">
+<meta name="citation_keywords" content="Asset pricing; heterogeneous agents; endogeneous expectations; artificial stock market">
+<meta name="citation_abstract" content="We propose a theory of asset pricing based on heterogeneous agents who continually adapt their expectations to the market that these expectations aggregatively create. And we explore the implications of this theory computationally using our Santa Fe artificial stock market.  Asset markets, we argue, have a recursive nature in that agents' expectations are formed on the basis of their anticipations of other agents' expectations, which precludes expectations being formed by deductive means. Instead traders continually hypothesize---continually explore---expectational models, buy or sell on the basis of those that perform best, and confirm or discard these according to their performance. Thus individual beliefs or expectations become endogenous to the market, and constantly compete within an ecology of others' beliefs or expectations. The ecology of beliefs coevolves over time.  Computer experiments with this endogenous-expectations market explain one of the more striking puzzles in finance: that market traders often believe in such concepts as technical trading, &quot;market psychology,&quot; and bandwagon effects, while academic theorists believe in market efficiency and a lack of speculative opportunities. Both views, we show, are correct, but within different regimes. Within a regime where investors explore alternative expectational models at a low rate, the market settles into the rational-expectations equilibrium of the efficient-market literature. Within a regime where the rate of exploration of alternative expectations is higher, the market self-organizes into a complex pattern. It acquires a rich psychology, technical trading emerges, temporary bubbles and crashes occur, and asset prices and trading volume show statistical features---in particular, GARCH behavior---characteristic of actual market data.">
+<meta name="citation_abstract_html_url" content="https://EconPapers.repec.org/RePEc:wop:safiwp:96-12-093">
+<link rel='canonical' href='https://EconPapers.repec.org/RePEc:wop:safiwp:96-12-093'>
+<!-- END META -->
+</head>
+<body background="/bg.gif">
+  <table border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td rowspan="5" bgcolor="#008241" width="4">&nbsp;</td>
+      <td bgcolor="#008241" colspan="3" width='251'><a href='https://econpapers.repec.org/'><img border="0" src="/logo_econpapers.gif" width="251" height="37" alt="EconPapers"></a></td>
+      <td bgcolor="#008241" width='100%'>&nbsp;</td>
+      <td rowspan="5" bgcolor="#008241" width="4">&nbsp;</td>
+    </tr>
+    <tr>
+      <td bgcolor="#008241" colspan="3" width='251'><a href='https://econpapers.repec.org/'><img border="0" src="/logo2_econpapers.gif" width="251" height="16" alt="Economics at your fingertips"></a></td>
+      <td bgcolor="#008241">&nbsp;</td>
+    </tr>
+    <tr>
+      <td valign='top'><div  class='sidebar'>
+        <p><a href="/">EconPapers Home</a>
+        <br><a href="/about.htm">About EconPapers</a>
+        <p><a href="/paper/">Working Papers</a>
+        <br><a href="/article/">Journal Articles</a>
+        <br><a href="/bookchap/">Books and Chapters</a>
+        <br><a href="/software/">Software Components</a>
+        <p><a href="/RAS/">Authors</a>
+        <p><a href="/scripts/jelsearch.pf">JEL codes</a>
+        <br><a href='/scripts/nep.pf'>New Economics Papers</a>
+        <!-- EXTRA MENU -->
+        <p style='margin-bottom: 0.5em'><a href="/scripts/search.pf">Advanced Search</a></p>
+        <form action="/scripts/search.pf" method="GET" name="search" accept-charset="UTF-8">
+          <div align="left">
+                <input type="text" name="ft" class='quicksearch' size='10'><br>
+                <input type=submit value="Quick Search" class="button">
+          </div>
+        </form>
+        <p><a href="/FAQ.htm">EconPapers FAQ</a>
+        <br><span class='smaller'><a href='/archiveFAQ.htm'>Archive maintainers FAQ</a>
+        <br><a href="/FAQ.htm#Cookies">Cookies at EconPapers</a>
+        </span>
+        <p><a href='/scripts/a/abstract.pf?p=y;h=RePEc:wop:safiwp:96-12-093'>Format for printing</a>
+        <p><a href='https://blog.repec.org/'>The RePEc blog</a>
+        <br><span class="smaller"><a href="https://plagiarism.repec.org/">The RePEc plagiarism page</a></span>
+        </div>
+      </td>      
+      <td rowspan="2" bgcolor="#008241" width="4">
+      &nbsp;
+      </td>
+      <td rowspan="2" colspan="2" width="100%" valign=top bgcolor="#FFFFFF">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+          <tr>
+
+<td rowspan='1' valign='top' width='85%'><div class='bodytext'>
+<!-- BEGIN CUT -->
+
+<div id='processing' class='itemref' onClick='clear_wait()'><img width='0' height='0' align=middle src='/EPwait.gif'></div><div id='greyedout' class='itemshadow' onClick='clear_wait()'></div>
+<h1 class="colored">Asset Pricing Under Endogenous Expectation in an Artificial Stock Market</h1>
+
+<p><i>W. Brian Arthur</i>, 
+<i>John H. Holland</i>, 
+<i><a href="/RAS/ple1.htm">Blake Lebaron</a></i> (<script language='JavaScript' type='text/javascript'>Obfuscate( '&#98;&#114;&#97;&#110;&#100;&#101;&#105;&#115;&#46;&#101;&#100;&#117;', '&#98;&#108;&#101;&#98;&#97;&#114;&#111;&#110;' )</script>), 
+<i>Richard Palmer</i> and 
+<i>Paul Taylor</i>
+
+
+<p><a href='/paper/wopsafiwp/'>Working Papers</a> from  <a href="http://www.santafe.edu/sfi/publications/working-papers.html">Santa Fe Institute</a>
+<p><b>Abstract:</b>
+We propose a theory of asset pricing based on heterogeneous agents who continually adapt their expectations to the market that these expectations aggregatively create. And we explore the implications of this theory computationally using our Santa Fe artificial stock market. <p> Asset markets, we argue, have a recursive nature in that agents' expectations are formed on the basis of their anticipations of other agents' expectations, which precludes expectations being formed by deductive means. Instead traders continually hypothesize---continually explore---expectational models, buy or sell on the basis of those that perform best, and confirm or discard these according to their performance. Thus individual beliefs or expectations become endogenous to the market, and constantly compete within an ecology of others' beliefs or expectations. The ecology of beliefs coevolves over time. <p> Computer experiments with this endogenous-expectations market explain one of the more striking puzzles in finance: that market traders often believe in such concepts as technical trading, "market psychology," and bandwagon effects, while academic theorists believe in market efficiency and a lack of speculative opportunities. Both views, we show, are correct, but within different regimes. Within a regime where investors explore alternative expectational models at a low rate, the market settles into the rational-expectations equilibrium of the efficient-market literature. Within a regime where the rate of exploration of alternative expectations is higher, the market self-organizes into a complex pattern. It acquires a rich psychology, technical trading emerges, temporary bubbles and crashes occur, and asset prices and trading volume show statistical features---in particular, GARCH behavior---characteristic of actual market data.
+<p><b>Keywords:</b> <a href="/scripts/search.pf?kw=Asset pricing">Asset pricing</a>; <a href="/scripts/search.pf?kw=heterogeneous agents">heterogeneous agents</a>; <a href="/scripts/search.pf?kw=endogeneous expectations">endogeneous expectations</a>; <a href="/scripts/search.pf?kw=artificial stock market">artificial stock market</a> (search for similar items in EconPapers)<br>
+<b>Date:</b> 1996-12<br>
+<b>References:</b> <a onClick='return wait_while_processing();' href='/scripts/showcites.pf?h=repec:wop:safiwp:96-12-093;reflist=local'>View references in EconPapers</a> <a onClick='return wait_while_processing();' href='/scripts/showcites.pf?h=repec:wop:safiwp:96-12-093;reflist=citec'>View complete reference list from CitEc</a> <br><b>Citations:</b> <a href='/scripts/showcites.pf?h=repec:wop:safiwp:96-12-093'>View citations in EconPapers</a> (93) 
+
+<p>There are no downloads for this item, see the <a href='/FAQ.htm#Obtaining'>EconPapers FAQ</a> for hints about obtaining it.
+
+
+<p><b>Related works:</b><br>Working Paper: <a href='/paper/attwimass/9625.htm'>Asset Pricing Under Endogenous Expectations in an Artificial Stock Market</a> (1996)<br>This item may be available elsewhere in EconPapers: <a href='/scripts/search.pf?adv=true;wp=on;art=on;soft=on;mh=100;ph=10;sort=rank;kwp=true;kw=Asset+Pricing+Under+Endogenous+Expectation+in+an+Artificial+Stock+Market'>Search</a> for items with the same title.
+<p><b>Export reference:</b> <span class="fakelink" onClick="return item_as_reference('bibtex')">BibTeX</span> 
+<span class=fakelink onClick="return item_as_reference('ris')">RIS</span> (EndNote, ProCite, RefMan) 
+<span class=fakelink onClick="return item_as_reference('html')">HTML/Text</span>
+<div id='itemref' class='itemref'></div><div id='itemshadow' class='itemshadow'></div>
+
+<p><b>Persistent link:</b> <a href='/RePEc:wop:safiwp:96-12-093'>https://EconPapers.repec.org/RePEc:wop:safiwp:96-12-093</a>
+
+<p><a href='https://logec.repec.org/scripts/paperstat.pf?h=repec:wop:safiwp:96-12-093'>Access Statistics</a> for this paper
+<p><a href='/paper/wopsafiwp/'>More papers</a> in Working Papers  from  <a href="http://www.santafe.edu/sfi/publications/working-papers.html">Santa Fe Institute</a><span class='smaller'> Contact information at <a href='https://edirc.repec.org/data/epstfus.html'>EDIRC</a>.</span><span class='smaller'><br>Bibliographic data for series maintained by Thomas Krichel (<script language='JavaScript' type='text/javascript'>Obfuscate( '&#111;&#112;&#101;&#110;&#108;&#105;&#98;&#46;&#111;&#114;&#103;', '&#107;&#114;&#105;&#99;&#104;&#101;&#108;' )</script>).</span>
+<!-- END CUT --></div></td><td rowspan='1' valign='top' width='15%'><div class='bodytext'>&nbsp;
+<!-- AddThis Button BEGIN -->
+<script type="text/javascript">var addthis_config = {"data_track_clickback":true}; var addthis_share = { url:
+"https://EconPapers.repec.org/RePEc:wop:safiwp:96-12-093"}</script>
+<div class="addthis_toolbox addthis_default_style">
+<a href="https://www.addthis.com/bookmark.php?v=250&amp;username=econpapers" class="addthis_button_compact">Share</a>
+</div>
+<script type="text/javascript" src="https://s7.addthis.com/js/250/addthis_widget.js#username=econpapers"></script>
+<!-- AddThis Button END -->
+
+
+            </div></td>
+          </tr>
+        </table>
+
+      </td>
+    </tr>
+    <tr>
+      <td valign='bottom'><div class='sidebar'>
+        <p class="smaller"><div align="center"><a href='http://repec.org/'><img src="/repec3.gif" alt="RePEc" width='127' height='29'></a></div>
+        <div class="smaller">This site is part of <a href="http://repec.org/">RePEc</a>
+        and all the data displayed here is part of the RePEc data set.</div>
+        <p class="smaller">Is your work missing from RePEc? Here is how to 
+        <a href="/FAQ.htm#works">contribute</a>.
+        <p class="smaller">Questions or problems? Check the <a href="/FAQ.htm">EconPapers FAQ</a> or send mail to <script language='JavaScript' type='text/javascript'>Obfuscate( '&#111;&#114;&#117;&#46;&#115;&#101;', '&#101;&#99;&#111;&#110;&#112;&#97;&#112;&#101;&#114;&#115;' )</script>.
+        <p class='smaller'><a href='https://www.oru.se/'><img align='left' src='/oru.gif' alt="Örebro University" hspace='0' vspace='0' width='30' height='39'></a>EconPapers is hosted by the
+        <a href='https://www.oru.se/hh'>School of Business</a> at <a href='https://www.oru.se/'>Örebro University</a>.
+        </p></div>
+      </td>
+    </tr>
+    <tr>
+      <td bgcolor="#008241" colspan='3' valign="top" align="left"><div class="not">
+
+
+Page updated 2025-08-13
+      </div></td>
+      <td bgcolor="#008241" colspan='1' valign="top" align="right"><div class="not">
+
+Handle: RePEc:wop:safiwp:96-12-093
+      </div></td>
+    </tr>
+    <tr> <!-- Ugly trick to get IE to make sidebar as narrow as possible -->
+      <td></td><td></td><td></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td></td><td></td>
+    </tr>
+  </table>
+
+</body>
+</html>
+

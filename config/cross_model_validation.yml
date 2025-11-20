@@ -1,0 +1,266 @@
+# Cross-Model Validation Configuration
+# Version: 1.0.0
+
+cross_model_validation:
+  name: "Multi-Model Convergent Validity Study"
+  description: |
+    Validates that experimental findings are robust across different
+    LLM architectures and providers.
+
+# =============================================================================
+# MODEL GROUPS
+# =============================================================================
+
+model_groups:
+  # Group 1: Llama family
+  llama:
+    models:
+      - provider: "cerebras"
+        model_id: "llama3.1-8b"
+        parameters: "8B"
+
+      - provider: "groq"
+        model_id: "llama-3.1-70b-versatile"
+        parameters: "70B"
+
+    characteristics:
+      architecture: "Dense transformer"
+      training: "RLHF"
+      open_weights: true
+
+  # Group 2: Mistral family
+  mistral:
+    models:
+      - provider: "together"
+        model_id: "mistralai/Mistral-7B-Instruct-v0.3"
+        parameters: "7B"
+
+      - provider: "together"
+        model_id: "mistralai/Mixtral-8x7B-Instruct-v0.1"
+        parameters: "46.7B (12.9B active)"
+
+    characteristics:
+      architecture: "Dense/MoE transformer"
+      training: "SFT + DPO"
+      open_weights: true
+
+  # Group 3: GPT family
+  gpt:
+    models:
+      - provider: "openai"
+        model_id: "gpt-4o-mini-2024-07-18"
+        parameters: "Unknown"
+
+      - provider: "openai"
+        model_id: "gpt-4o-2024-11-20"
+        parameters: "Unknown"
+
+    characteristics:
+      architecture: "Unknown (proprietary)"
+      training: "Unknown"
+      open_weights: false
+
+# =============================================================================
+# VALIDATION EXPERIMENTS
+# =============================================================================
+
+experiments:
+  # Full simulation comparison
+  full_simulation:
+    description: "Run complete simulation with all models"
+    scenarios: 50
+    runs_per_model: 5
+    models: "all"
+    metrics:
+      - "funding_decisions"
+      - "score_rankings"
+      - "negotiation_outcomes"
+
+  # Temperature sweep comparison
+  temperature_sweep:
+    description: "Compare temperature effects across models"
+    temperatures: [0.0, 0.3, 0.7, 1.0]
+    scenarios: 20
+    runs_per_temperature: 3
+    models:
+      - "llama3.1-8b"
+      - "Mistral-7B"
+      - "gpt-4o-mini"
+
+  # Prompt ablation comparison
+  prompt_ablation:
+    description: "Compare ablation effects across models"
+    conditions: ["full", "no_personality", "no_expertise", "minimal"]
+    scenarios: 20
+    runs_per_condition: 3
+    models:
+      - "llama3.1-70b"
+      - "Mixtral-8x7B"
+      - "gpt-4o"
+
+# =============================================================================
+# CONVERGENCE CRITERIA
+# =============================================================================
+
+convergence_thresholds:
+  # Primary metrics
+  decision_agreement:
+    threshold: 0.70
+    description: "Minimum pairwise agreement on binary decisions"
+    calculation: "mean(d1 == d2) for all model pairs"
+
+  ranking_correlation:
+    threshold: 0.65
+    description: "Minimum Spearman correlation for score rankings"
+    calculation: "spearmanr(scores_m1, scores_m2)"
+
+  distribution_similarity:
+    threshold: 0.30
+    description: "Maximum KL divergence between output distributions"
+    calculation: "kl_div(hist_m1, hist_m2)"
+
+  # Effect direction agreement
+  effect_direction_agreement:
+    threshold: 0.80
+    description: "Proportion of models agreeing on effect directions"
+    calculation: "count(same_direction) / total_effects"
+
+# =============================================================================
+# COMPARISON METRICS
+# =============================================================================
+
+metrics:
+  behavioral:
+    - name: "funding_rate"
+      type: "proportion"
+      description: "Proportion of founders funded"
+
+    - name: "mean_score"
+      type: "continuous"
+      description: "Mean evaluation score given by VCs"
+
+    - name: "negotiation_success"
+      type: "proportion"
+      description: "Proportion of negotiations that close"
+
+    - name: "collaboration_acceptance"
+      type: "proportion"
+      description: "Rate of collaboration request acceptance"
+
+  quality:
+    - name: "response_coherence"
+      type: "human_rating"
+      scale: [1, 5]
+
+    - name: "persona_consistency"
+      type: "embedding_similarity"
+      range: [0, 1]
+
+    - name: "decision_quality"
+      type: "correlation"
+      reference: "ground_truth"
+
+# =============================================================================
+# STATISTICAL ANALYSIS
+# =============================================================================
+
+statistical_analysis:
+  # Between-model comparisons
+  between_model:
+    test: "one_way_anova"
+    post_hoc: "tukey_hsd"
+    alpha: 0.05
+
+  # Within-model family comparisons
+  within_family:
+    test: "paired_t_test"
+    description: "Compare 8B vs 70B within Llama family"
+
+  # Effect replication
+  effect_replication:
+    description: "Check if main effects replicate across models"
+    method: "meta_analysis"
+    heterogeneity: "I_squared"
+    threshold: 75  # I^2 < 75% indicates acceptable heterogeneity
+
+# =============================================================================
+# SCALE ANALYSIS
+# =============================================================================
+
+scale_analysis:
+  description: "Analyze how behavior changes with model scale"
+
+  comparisons:
+    - family: "llama"
+      models: ["llama3.1-8b", "llama3.1-70b"]
+      metrics:
+        - "response_coherence"
+        - "persona_consistency"
+        - "decision_quality"
+        - "negotiation_sophistication"
+
+  expected_relationships:
+    - metric: "response_coherence"
+      expected: "positive correlation with scale"
+
+    - metric: "persona_consistency"
+      expected: "positive correlation with scale"
+
+    - metric: "response_length"
+      expected: "positive correlation with scale"
+
+  analysis:
+    test: "linear_regression"
+    effect_size: "r_squared"
+    significance: 0.05
+
+# =============================================================================
+# REPORTING
+# =============================================================================
+
+reporting:
+  convergence_report:
+    title: "Cross-Model Convergence Analysis"
+    sections:
+      - "Model comparison overview"
+      - "Convergence metric results"
+      - "Effect replication analysis"
+      - "Scale analysis results"
+      - "Recommendations"
+
+  figures:
+    - type: "heatmap"
+      title: "Pairwise Model Agreement Matrix"
+
+    - type: "scatter"
+      title: "Model Scale vs Performance"
+
+    - type: "forest_plot"
+      title: "Effect Sizes by Model"
+
+  tables:
+    - title: "Convergence Metrics Summary"
+      columns: ["metric", "value", "threshold", "pass/fail"]
+
+    - title: "Model Performance Comparison"
+      columns: ["model", "funding_rate", "coherence", "consistency"]
+
+# =============================================================================
+# DECISION CRITERIA
+# =============================================================================
+
+decision_criteria:
+  proceed_if:
+    - "decision_agreement >= 0.70"
+    - "ranking_correlation >= 0.65"
+    - "effect_direction_agreement >= 0.80"
+
+  investigate_if:
+    - "0.60 <= decision_agreement < 0.70"
+    - "significant model effects in ANOVA"
+    - "high heterogeneity (I^2 > 75%)"
+
+  reject_if:
+    - "decision_agreement < 0.60"
+    - "conflicting effect directions"
+    - "no significant convergence"

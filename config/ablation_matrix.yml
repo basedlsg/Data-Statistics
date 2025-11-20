@@ -1,0 +1,269 @@
+# Prompt Ablation Study Configuration
+# Version: 1.0.0
+
+ablation_study:
+  name: "Prompt Component Ablation Analysis"
+  description: |
+    Systematic removal of prompt components to measure their individual
+    and combined impact on agent behavior quality.
+
+# =============================================================================
+# ABLATION CONDITIONS
+# =============================================================================
+
+conditions:
+  full:
+    name: "Full Prompt (Baseline)"
+    description: "All components present"
+    components:
+      identity: true
+      role: true
+      expertise: true
+      personality: true
+      team_context: true
+      guidelines: true
+      current_state: true
+
+  no_identity:
+    name: "No Identity"
+    description: "Remove agent name and role"
+    components:
+      identity: false
+      role: false
+      expertise: true
+      personality: true
+      team_context: true
+      guidelines: true
+      current_state: true
+
+  no_personality:
+    name: "No Personality"
+    description: "Remove personality traits"
+    components:
+      identity: true
+      role: true
+      expertise: true
+      personality: false
+      team_context: true
+      guidelines: true
+      current_state: true
+
+  no_expertise:
+    name: "No Expertise"
+    description: "Remove expertise list"
+    components:
+      identity: true
+      role: true
+      expertise: false
+      personality: true
+      team_context: true
+      guidelines: true
+      current_state: true
+
+  no_context:
+    name: "No Team Context"
+    description: "Remove team member descriptions"
+    components:
+      identity: true
+      role: true
+      expertise: true
+      personality: true
+      team_context: false
+      guidelines: true
+      current_state: true
+
+  no_guidelines:
+    name: "No Guidelines"
+    description: "Remove response guidelines"
+    components:
+      identity: true
+      role: true
+      expertise: true
+      personality: true
+      team_context: true
+      guidelines: false
+      current_state: true
+
+  no_state:
+    name: "No Current State"
+    description: "Remove current task/stress info"
+    components:
+      identity: true
+      role: true
+      expertise: true
+      personality: true
+      team_context: true
+      guidelines: true
+      current_state: false
+
+  minimal:
+    name: "Minimal Prompt"
+    description: "Only identity and task"
+    components:
+      identity: true
+      role: true
+      expertise: false
+      personality: false
+      team_context: false
+      guidelines: false
+      current_state: false
+
+  no_all_context:
+    name: "No Context Components"
+    description: "Remove all contextual information"
+    components:
+      identity: true
+      role: true
+      expertise: false
+      personality: false
+      team_context: false
+      guidelines: false
+      current_state: false
+
+# =============================================================================
+# METRICS TO MEASURE
+# =============================================================================
+
+metrics:
+  primary:
+    - name: "response_relevance"
+      type: "human_rating"
+      scale: [1, 5]
+      description: "How relevant is the response to the task?"
+
+    - name: "character_consistency"
+      type: "embedding_similarity"
+      range: [0, 1]
+      description: "Cosine similarity to expected character behavior"
+
+    - name: "task_completion_quality"
+      type: "human_rating"
+      scale: [1, 5]
+      description: "Quality of task completion"
+
+  secondary:
+    - name: "response_length"
+      type: "token_count"
+      description: "Number of tokens in response"
+
+    - name: "behavioral_variance"
+      type: "decision_std"
+      description: "Standard deviation of decisions across runs"
+
+    - name: "perplexity"
+      type: "model_score"
+      description: "Perplexity of response text"
+
+    - name: "vocabulary_diversity"
+      type: "type_token_ratio"
+      description: "Lexical diversity of responses"
+
+# =============================================================================
+# EXPERIMENTAL DESIGN
+# =============================================================================
+
+design:
+  type: "within_subjects"
+
+  scenarios:
+    count: 20
+    types:
+      - "standup_update"
+      - "task_assignment_response"
+      - "collaboration_request"
+      - "feedback_response"
+      - "help_request"
+
+  runs_per_scenario: 5
+
+  total_api_calls_per_model: 900  # 9 conditions x 20 scenarios x 5 runs
+
+# =============================================================================
+# EXPECTED OUTCOMES
+# =============================================================================
+
+hypotheses:
+  h1:
+    description: "Personality component improves character consistency"
+    test: "paired_t_test"
+    comparison: ["full", "no_personality"]
+    metric: "character_consistency"
+    expected_direction: "full > no_personality"
+
+  h2:
+    description: "Expertise component improves response relevance"
+    test: "paired_t_test"
+    comparison: ["full", "no_expertise"]
+    metric: "response_relevance"
+    expected_direction: "full > no_expertise"
+
+  h3:
+    description: "State information reduces behavioral variance"
+    test: "paired_t_test"
+    comparison: ["full", "no_state"]
+    metric: "behavioral_variance"
+    expected_direction: "full < no_state"
+
+  h4:
+    description: "Guidelines improve task completion quality"
+    test: "paired_t_test"
+    comparison: ["full", "no_guidelines"]
+    metric: "task_completion_quality"
+    expected_direction: "full > no_guidelines"
+
+# =============================================================================
+# ANALYSIS PLAN
+# =============================================================================
+
+analysis:
+  # Main effects
+  main_effects:
+    test: "one_way_anova"
+    conditions: "all"
+    metrics: ["response_relevance", "character_consistency", "task_completion_quality"]
+
+  # Post-hoc comparisons
+  post_hoc:
+    test: "tukey_hsd"
+    alpha: 0.05
+    correction: "bonferroni"
+
+  # Effect sizes
+  effect_sizes:
+    measure: "cohens_d"
+    threshold: 0.3  # Minimum meaningful effect
+
+  # Interaction effects
+  interactions:
+    test: "two_way_anova"
+    factors:
+      - "condition"
+      - "scenario_type"
+
+# =============================================================================
+# REPORTING
+# =============================================================================
+
+reporting:
+  figures:
+    - type: "heatmap"
+      title: "Ablation Impact Matrix"
+      x: "conditions"
+      y: "metrics"
+      values: "effect_sizes"
+
+    - type: "bar_chart"
+      title: "Component Importance Ranking"
+      metric: "mean_impact_score"
+
+    - type: "line_chart"
+      title: "Performance vs Prompt Complexity"
+      x: "n_components"
+      y: "metrics"
+
+  tables:
+    - title: "Ablation Results Summary"
+      columns: ["condition", "relevance", "consistency", "quality", "p_value"]
+
+    - title: "Component Impact Rankings"
+      columns: ["component", "impact_score", "std", "significance"]

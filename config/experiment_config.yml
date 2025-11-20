@@ -1,0 +1,244 @@
+# LLM Experiment Configuration
+# Version: 1.0.0
+# This file defines the complete experimental setup
+
+experiment:
+  name: "Agent Behavior Simulation - Cross-Model Validation"
+  version: "1.0.0"
+  date: "2025-11-19"
+  seed: 42
+
+# =============================================================================
+# MODEL CONFIGURATIONS
+# =============================================================================
+
+models:
+  # Primary model family
+  primary:
+    - provider: "cerebras"
+      model_id: "llama3.1-8b"
+      display_name: "Llama 3.1 8B"
+      context_window: 128000
+
+    - provider: "groq"
+      model_id: "llama-3.1-70b-versatile"
+      display_name: "Llama 3.1 70B"
+      context_window: 128000
+
+  # Secondary model family
+  secondary:
+    - provider: "together"
+      model_id: "mistralai/Mistral-7B-Instruct-v0.3"
+      display_name: "Mistral 7B"
+      context_window: 32000
+
+    - provider: "together"
+      model_id: "mistralai/Mixtral-8x7B-Instruct-v0.1"
+      display_name: "Mixtral 8x7B"
+      context_window: 32000
+
+  # Tertiary model family
+  tertiary:
+    - provider: "openai"
+      model_id: "gpt-4o-mini-2024-07-18"
+      display_name: "GPT-4o Mini"
+      context_window: 128000
+
+    - provider: "openai"
+      model_id: "gpt-4o-2024-11-20"
+      display_name: "GPT-4o"
+      context_window: 128000
+
+# =============================================================================
+# INFERENCE SETTINGS
+# =============================================================================
+
+inference:
+  # Reproducibility condition (primary)
+  reproducible:
+    temperature: 0.0
+    top_p: 1.0
+    top_k: 1
+    max_tokens: 500
+    seed: 42
+
+  # Temperature sweep conditions
+  temperature_sweep:
+    values: [0.0, 0.1, 0.3, 0.5, 0.7, 0.9, 1.0]
+    top_p: 0.95
+    top_k: 100
+    max_tokens: 500
+    runs_per_temperature: 10
+
+  # Default agent behavior
+  default:
+    temperature: 0.7
+    top_p: 0.95
+    top_k: 100
+    max_tokens: 500
+
+# =============================================================================
+# CONTEXT MANAGEMENT
+# =============================================================================
+
+context:
+  max_tokens: 8192
+  system_prompt_budget: 1000
+  response_budget: 500
+  history_budget: 6692  # max - system - response
+
+  strategies:
+    default: "recency_weighted"
+    available:
+      - "full"
+      - "recency_weighted"
+      - "importance_weighted"
+      - "summarized"
+
+  summarization:
+    trigger_threshold: 500  # tokens remaining
+    keep_recent_turns: 5
+
+# =============================================================================
+# PROMPT CONFIGURATION
+# =============================================================================
+
+prompts:
+  version: "1.2.0"
+  template_dir: "prompts/"
+
+  ablation:
+    enabled: true
+    conditions:
+      - "full"           # All components
+      - "no_personality" # Remove personality traits
+      - "no_expertise"   # Remove expertise list
+      - "no_context"     # Remove team context
+      - "no_state"       # Remove current state
+      - "minimal"        # Only identity and task
+
+  paraphrase_testing:
+    enabled: true
+    versions_per_prompt: 5
+    prompts_to_test:
+      - "standup_request"
+      - "task_response_request"
+      - "feedback_response_request"
+
+# =============================================================================
+# CONTAMINATION MITIGATION
+# =============================================================================
+
+contamination:
+  novel_scenario_generation:
+    enabled: true
+    seed: 42
+
+  forbidden_patterns:
+    company_names:
+      - "juicero"
+      - "theranos"
+      - "wework"
+      - "uber"
+      - "airbnb"
+
+    phrases:
+      - "paradigm shift"
+      - "category defining"
+      - "10x improvement"
+      - "uber for"
+      - "airbnb for"
+
+  verification:
+    check_before_experiment: true
+    check_during_experiment: true
+    novelty_score_threshold: 0.6
+    memorization_accuracy_threshold: 0.2
+
+# =============================================================================
+# EXPERIMENT DESIGN
+# =============================================================================
+
+experiment_design:
+  # Scenarios
+  n_scenarios: 50
+  n_founders: 20
+  n_weeks: 4
+
+  # Runs
+  runs_per_condition: 5
+
+  # Cross-model validation
+  cross_model:
+    enabled: true
+    min_model_families: 3
+    convergence_thresholds:
+      decision_agreement: 0.70
+      ranking_correlation: 0.65
+      distribution_similarity: 0.30
+      effect_direction_agreement: 0.80
+
+# =============================================================================
+# OUTPUT ANALYSIS
+# =============================================================================
+
+analysis:
+  perplexity:
+    enabled: true
+    reference_model: "gpt2"
+    memorization_threshold: 10
+    confusion_threshold: 100
+
+  token_probabilities:
+    enabled: true
+    low_confidence_threshold: 0.3
+    requires_logprobs: true
+
+  embeddings:
+    enabled: true
+    model: "all-MiniLM-L6-v2"
+    diversity_threshold: 0.3
+
+  statistical_tests:
+    alpha: 0.05
+    correction: "bonferroni"
+    effect_size_threshold: 0.3  # Cohen's d
+
+# =============================================================================
+# LOGGING AND OUTPUT
+# =============================================================================
+
+output:
+  results_dir: "results/"
+  logs_dir: "logs/"
+  figures_dir: "figures/"
+
+  logging:
+    level: "INFO"
+    format: "jsonl"
+    include_api_responses: true
+    include_tokens: true
+    include_costs: true
+
+  checkpointing:
+    enabled: true
+    frequency: "per_scenario"
+
+# =============================================================================
+# REPRODUCIBILITY
+# =============================================================================
+
+reproducibility:
+  random_seeds:
+    master: 42
+    numpy: 42
+    python_hash: 42
+
+  environment:
+    python_version: "3.11"
+    requirements_file: "requirements.txt"
+    dockerfile: "Dockerfile"
+
+  verification:
+    same_input_test: true
+    cross_session_test: true

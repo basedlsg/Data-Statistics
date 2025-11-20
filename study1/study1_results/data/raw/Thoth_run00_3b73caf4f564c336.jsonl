@@ -1,0 +1,2 @@
+{"event": "SESSION_START", "session_id": "3b73caf4f564c336", "agent_id": "Thoth", "run_number": 0, "timestamp": "2025-11-20T08:10:01.151214", "unix_timestamp": 1763626201.1512167, "log_file": "study1_results/data/raw/Thoth_run00_3b73caf4f564c336.jsonl", "schema_version": "1.0"}
+{"event": "CONDITION_START", "session_id": "3b73caf4f564c336", "agent_id": "Thoth", "run_number": 0, "session_number": 1, "condition": "N", "order_position": 1, "timestamp": "2025-11-20T08:10:01.152028", "unix_timestamp": 1763626201.1520367}

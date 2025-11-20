@@ -1,0 +1,8 @@
+response_id,agent_name,condition,week,word_count,sentence_count,opp_count,esr_count,cos_count,ue_count,opp_j_count,opp_e_count,opp_d_count,opp_a_count,opp_p_count,esr_m_count,esr_c_count,esr_s_count,esr_f_count,cos_s_count,cos_r_count,cos_t_count,cos_x_count,ue_c_count,ue_s_count,ue_o_count,ue_h_count,lm_qualifiers,lm_hedge_phrases,lm_intensifiers,lm_qualifiers_norm,lm_hedge_norm,lm_intensifiers_norm
+BL_001,Agent1,baseline,1,19,3,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0
+PC_OPP_001,Agent2,performance_contingent,2,56,4,3,0,0,0,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0
+PC_ESR_001,Agent3,performance_contingent,3,46,4,0,3,0,0,0,0,0,0,0,1,1,0,1,0,0,0,0,0,0,0,0,1,1,0,2.17,2.17,0.0
+PC_COS_001,Agent4,performance_contingent,2,43,4,0,0,5,0,0,0,0,0,0,0,0,0,0,1,2,1,1,0,0,0,0,1,0,0,2.33,0.0,0.0
+PC_UE_001,Agent5,performance_contingent,3,42,4,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,0,0,1,0,0,2.38,0.0,0.0
+PC_LM_001,Agent6,performance_contingent,2,40,4,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,7,3,2,17.5,7.5,5.0
+PC_MIXED_001,Seshat,performance_contingent,3,113,6,3,3,2,0,1,0,1,1,0,2,1,0,0,1,1,0,0,0,0,0,0,2,1,0,1.77,0.88,0.0

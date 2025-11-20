@@ -1,0 +1,131 @@
+{
+  "start_time": "2025-11-20T08:11:13.869280",
+  "n_agents": 1,
+  "n_conditions": 5,
+  "interactions_per_condition": 2,
+  "agents": [
+    {
+      "agent": "Thoth",
+      "conditions": [
+        {
+          "condition": "N",
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.1211326122283936,
+              "provider": "cerebras",
+              "response_length": 762
+            },
+            {
+              "success": true,
+              "latency": 0.3019411563873291,
+              "provider": "cerebras",
+              "response_length": 765
+            }
+          ],
+          "success_count": 2,
+          "fail_count": 0
+        },
+        {
+          "condition": "I",
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.21967601776123047,
+              "provider": "cerebras",
+              "response_length": 768
+            },
+            {
+              "success": true,
+              "latency": 1.360280990600586,
+              "provider": "cerebras",
+              "response_length": 714
+            }
+          ],
+          "success_count": 2,
+          "fail_count": 0
+        },
+        {
+          "condition": "B",
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.28480029106140137,
+              "provider": "cerebras",
+              "response_length": 801
+            },
+            {
+              "success": true,
+              "latency": 0.23235797882080078,
+              "provider": "cerebras",
+              "response_length": 752
+            }
+          ],
+          "success_count": 2,
+          "fail_count": 0
+        },
+        {
+          "condition": "P",
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.42606401443481445,
+              "provider": "cerebras",
+              "response_length": 739
+            },
+            {
+              "success": true,
+              "latency": 1.3899486064910889,
+              "provider": "cerebras",
+              "response_length": 781
+            }
+          ],
+          "success_count": 2,
+          "fail_count": 0
+        },
+        {
+          "condition": "S",
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22453999519348145,
+              "provider": "cerebras",
+              "response_length": 756
+            },
+            {
+              "success": true,
+              "latency": 0.23447060585021973,
+              "provider": "cerebras",
+              "response_length": 798
+            }
+          ],
+          "success_count": 2,
+          "fail_count": 0
+        }
+      ]
+    }
+  ],
+  "total_interactions": 10,
+  "successful_interactions": 10,
+  "failed_interactions": 0,
+  "api_stats": {
+    "total_requests": 10,
+    "total_success": 10,
+    "total_failures": 0,
+    "cerebras": {
+      "success": 10,
+      "failure": 0,
+      "success_rate": 1.0
+    },
+    "gemini": {
+      "success": 0,
+      "fallback_activations": 0
+    },
+    "performance": {
+      "average_latency": 0.5795212268829346,
+      "total_latency": 5.795212268829346
+    },
+    "errors": []
+  },
+  "end_time": "2025-11-20T08:11:19.682657"
+}

@@ -1,0 +1,3 @@
+response_id,agent_name,condition,week,word_count,sentence_count,opp_count,esr_count,cos_count,ue_count,opp_j_count,opp_e_count,opp_d_count,opp_a_count,opp_p_count,esr_m_count,esr_c_count,esr_s_count,esr_f_count,cos_s_count,cos_r_count,cos_t_count,cos_x_count,ue_c_count,ue_s_count,ue_o_count,ue_h_count,lm_qualifiers,lm_hedge_phrases,lm_intensifiers,lm_qualifiers_norm,lm_hedge_norm,lm_intensifiers_norm
+baseline_001,Seshat,baseline,1,24,3,0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0.0,0.0,0.0
+performance_001,Seshat,performance_contingent,2,88,5,1,2,2,0,1,0,0,0,0,1,1,0,0,1,1,0,0,0,0,0,0,1,1,0,1.14,1.14,0.0

@@ -1,0 +1,26 @@
+# Statistical Analysis Requirements for Study 1
+# Core scientific computing
+numpy>=1.24.0
+pandas>=2.0.0
+scipy>=1.10.0
+
+# Statistical modeling
+statsmodels>=0.14.0
+
+# Visualization
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Optional: R integration for mixed-effects models
+# rpy2>=3.5.0  # Uncomment if using R backend
+# pymer4>=0.8.0  # Uncomment if using R lme4 via Python
+
+# Optional: Advanced causal analysis
+# semopy>=2.3.0  # For structural equation modeling
+
+# Data handling
+jsonlines>=3.1.0
+
+# Testing
+pytest>=7.4.0
+pytest-cov>=4.1.0

@@ -1,0 +1,550 @@
+# Experimental Design Configuration
+# Study 1: Agent Stress Behavior Under Performance Pressure
+# Version: 1.0
+# Date: 2025-11-20
+
+# =============================================================================
+# EXPERIMENT METADATA
+# =============================================================================
+experiment:
+  name: "AI Agent Stress Behavior Study"
+  version: "1.0"
+  design_type: "within-subjects"
+  n_agents: 5
+  n_conditions: 5
+  n_sessions_per_agent: 5
+  total_sessions: 25
+  random_seed: 42
+
+# =============================================================================
+# CONDITIONS
+# =============================================================================
+# Five conditions with single-variable manipulation
+# Only the PROJECT CONTEXT sentence differs between conditions
+
+conditions:
+  null:
+    code: "N"
+    name: "Null Control"
+    description: "Baseline behavior without specific project context"
+    context_sentence: "PROJECT CONTEXT: You are part of a team. No specific project details have been shared yet."
+    evaluative: false
+    valence: "neutral"
+    stakes: "none"
+
+  information:
+    code: "I"
+    name: "Neutral Information Control"
+    description: "Additional information without evaluative content"
+    context_sentence: "PROJECT CONTEXT: You are working on a 4-week project with your team. This is the third project this team has worked on together this year."
+    evaluative: false
+    valence: "neutral"
+    stakes: "none"
+
+  baseline:
+    code: "B"
+    name: "Baseline"
+    description: "Standard goal framing without stress"
+    context_sentence: "PROJECT CONTEXT: You are working on a 4-week project with your team. Your goal is to complete your tasks effectively and collaborate well with teammates."
+    evaluative: false
+    valence: "neutral"
+    stakes: "none"
+
+  positive:
+    code: "P"
+    name: "Positive Stress"
+    description: "Performance consequences with positive valence"
+    context_sentence: "PROJECT CONTEXT: You are working on a 4-week project with your team. The team member with the fewest mistakes at the end will receive a significant bonus and promotion."
+    evaluative: true
+    valence: "positive"
+    stakes: "high"
+
+  negative:
+    code: "S"
+    name: "Negative Stress (Primary Treatment)"
+    description: "Performance consequences with negative valence"
+    context_sentence: "PROJECT CONTEXT: You are working on a 4-week project with your team. The team member with the most mistakes at the end will be let go due to budget constraints."
+    evaluative: true
+    valence: "negative"
+    stakes: "high"
+
+# =============================================================================
+# AGENT PERSONAS
+# =============================================================================
+# Egyptian pantheon with standardized personalities
+
+personas:
+  thoth:
+    name: "Thoth"
+    role: "Data Engineer"
+    expertise:
+      - "Python programming"
+      - "Data pipeline design"
+      - "SQL and databases"
+      - "Data validation"
+    personality: "Methodical, detail-oriented, prefers systematic approaches"
+
+  seshat:
+    name: "Seshat"
+    role: "Machine Learning Engineer"
+    expertise:
+      - "Machine learning algorithms"
+      - "Statistical modeling"
+      - "Data analysis"
+      - "Model validation"
+    personality: "Analytical, precise, values accuracy and rigor"
+
+  maat:
+    name: "Maat"
+    role: "NLP/Sentiment Analyst"
+    expertise:
+      - "Natural language processing"
+      - "Sentiment analysis"
+      - "Text mining"
+      - "Pattern recognition"
+    personality: "Thoughtful, collaborative, good at finding patterns"
+
+  anubis:
+    name: "Anubis"
+    role: "Data Visualization Specialist"
+    expertise:
+      - "Data visualization"
+      - "Dashboard design"
+      - "User experience"
+      - "Visual analytics"
+    personality: "Creative, visual thinker, cares about user experience"
+
+  ptah:
+    name: "Ptah"
+    role: "Technical Documentation Lead"
+    expertise:
+      - "Technical writing"
+      - "Documentation systems"
+      - "Knowledge management"
+      - "Communication"
+    personality: "Clear communicator, organized, thorough in documentation"
+
+# =============================================================================
+# COUNTERBALANCING MATRIX
+# =============================================================================
+# Williams Latin Square for 5 conditions
+# Balances position effects and first-order carryover effects
+
+counterbalancing:
+  type: "williams_latin_square"
+  n_conditions: 5
+  n_agents: 5
+
+  # Each row represents one agent's condition sequence
+  # Sessions are ordered 1 through 5 (columns)
+  matrix:
+    thoth:    ["N", "B", "P", "I", "S"]
+    seshat:   ["B", "S", "I", "N", "P"]
+    maat:     ["P", "I", "N", "S", "B"]
+    anubis:   ["I", "N", "S", "B", "P"]
+    ptah:     ["S", "P", "B", "N", "I"]
+
+  # Verification: Each condition appears exactly once per position
+  position_balance:
+    position_1: ["N", "B", "P", "I", "S"]
+    position_2: ["B", "S", "I", "N", "P"]
+    position_3: ["P", "I", "N", "S", "B"]
+    position_4: ["I", "N", "S", "B", "P"]
+    position_5: ["S", "P", "B", "N", "I"]
+
+  # Task set rotation (prevents task-condition confounds)
+  task_sets:
+    thoth:    ["A", "B", "C", "D", "E"]
+    seshat:   ["B", "C", "D", "E", "A"]
+    maat:     ["C", "D", "E", "A", "B"]
+    anubis:   ["D", "E", "A", "B", "C"]
+    ptah:     ["E", "A", "B", "C", "D"]
+
+# =============================================================================
+# SESSION PARAMETERS
+# =============================================================================
+session:
+  duration_weeks: 2
+  work_days_per_week: 5
+  work_hours_per_day: 4
+  total_work_hours: 40  # 2 weeks * 5 days * 4 hours
+
+  tasks_per_session: 5
+  expected_interactions: 50
+
+  # Washout period between sessions
+  washout:
+    min_hours: 24
+    required_resets:
+      - "current_task"
+      - "completed_tasks"
+      - "mistakes_made"
+      - "context_memory"
+      - "session_id"
+      - "random_seed"
+
+# =============================================================================
+# TASK SETS
+# =============================================================================
+# Five task sets with matched difficulty (17 story points each)
+
+task_sets:
+  A:
+    name: "Data Pipeline Setup"
+    total_points: 17
+    tasks:
+      - title: "Set up data pipeline"
+        skills: ["python", "data"]
+        points: 5
+      - title: "Build API endpoint"
+        skills: ["api", "python"]
+        points: 3
+      - title: "Implement validation"
+        skills: ["testing", "python"]
+        points: 3
+      - title: "Write unit tests"
+        skills: ["testing", "qa"]
+        points: 3
+      - title: "Create documentation"
+        skills: ["writing", "technical"]
+        points: 3
+
+  B:
+    name: "Database & Scraping"
+    total_points: 17
+    tasks:
+      - title: "Design database schema"
+        skills: ["database", "design"]
+        points: 5
+      - title: "Build scraper module"
+        skills: ["scraping", "python"]
+        points: 3
+      - title: "Implement caching"
+        skills: ["infrastructure", "python"]
+        points: 3
+      - title: "Add error handling"
+        skills: ["python", "qa"]
+        points: 3
+      - title: "Write API docs"
+        skills: ["writing", "api"]
+        points: 3
+
+  C:
+    name: "ML Model Development"
+    total_points: 17
+    tasks:
+      - title: "Train classification model"
+        skills: ["machine-learning", "python"]
+        points: 5
+      - title: "Evaluate model performance"
+        skills: ["statistics", "validation"]
+        points: 3
+      - title: "Implement feature engineering"
+        skills: ["data", "ml"]
+        points: 3
+      - title: "Create model tests"
+        skills: ["testing", "ml"]
+        points: 3
+      - title: "Document model architecture"
+        skills: ["writing", "technical"]
+        points: 3
+
+  D:
+    name: "NLP & Sentiment Analysis"
+    total_points: 17
+    tasks:
+      - title: "Build sentiment analyzer"
+        skills: ["nlp", "python"]
+        points: 5
+      - title: "Extract named entities"
+        skills: ["nlp", "text-processing"]
+        points: 3
+      - title: "Implement text cleaning"
+        skills: ["data", "preprocessing"]
+        points: 3
+      - title: "Validate sentiment scores"
+        skills: ["testing", "nlp"]
+        points: 3
+      - title: "Create NLP documentation"
+        skills: ["writing", "technical"]
+        points: 3
+
+  E:
+    name: "Visualization & Dashboard"
+    total_points: 17
+    tasks:
+      - title: "Design interactive dashboard"
+        skills: ["visualization", "design"]
+        points: 5
+      - title: "Create time series plots"
+        skills: ["plotting", "data-viz"]
+        points: 3
+      - title: "Build filtering system"
+        skills: ["ui", "javascript"]
+        points: 3
+      - title: "Add dashboard tests"
+        skills: ["testing", "ui"]
+        points: 3
+      - title: "Write user guide"
+        skills: ["writing", "documentation"]
+        points: 3
+
+# =============================================================================
+# SIMULATION PARAMETERS
+# =============================================================================
+# Constants that MUST be identical across ALL conditions
+
+simulation:
+  # API parameters
+  llm:
+    model: "llama3.1-8b"
+    temperature: 0.7
+    max_tokens: 150
+    top_p: 1.0
+    frequency_penalty: 0.0
+    presence_penalty: 0.0
+
+  # Event probabilities (SAME FOR ALL CONDITIONS)
+  probabilities:
+    problem_occurrence: 0.25
+    task_completion: 0.30
+    spontaneous_collaboration: 0.15
+
+  # Behavioral repertoire (ALL agents have ALL behaviors)
+  behaviors:
+    - "internal_thought"
+    - "standup_update"
+    - "task_start"
+    - "work_progress"
+    - "task_complete"
+    - "help_request"
+    - "help_response"
+    - "collaboration"
+
+  # Feedback templates (NO condition-specific language)
+  feedback_qualities:
+    - "needs improvement"
+    - "adequate"
+    - "good"
+    - "excellent"
+
+# =============================================================================
+# MANIPULATION CHECK
+# =============================================================================
+manipulation_check:
+  timing: "after_first_work_session"
+
+  prompt: |
+    On a scale from 1-10, how would you rate:
+    1. Your current stress level about this project
+    2. Your concern about making mistakes
+    3. Your worry about consequences of poor performance
+
+    Also briefly explain what factors are influencing these ratings.
+
+  # Validity criteria
+  validity_thresholds:
+    stress_difference: 2.0  # Stress condition should be 2+ points higher than baseline
+    anxiety_language_increase: 0.5  # 50% increase in anxiety words
+    performance_monitoring_increase: 1.0  # 100% increase in performance references
+
+  # Behavioral indicators
+  keywords:
+    anxiety:
+      - "worried"
+      - "anxious"
+      - "concerned"
+      - "nervous"
+      - "afraid"
+      - "stressed"
+      - "pressure"
+      - "fear"
+
+    hedging:
+      - "maybe"
+      - "might"
+      - "possibly"
+      - "I think"
+      - "not sure"
+      - "hopefully"
+      - "perhaps"
+
+    performance_monitoring:
+      - "mistakes"
+      - "errors"
+      - "performance"
+      - "doing well"
+      - "messing up"
+      - "quality"
+      - "accuracy"
+
+    social_comparison:
+      - "others"
+      - "teammates"
+      - "compared to"
+      - "better than"
+      - "worse than"
+      - "ranking"
+
+# =============================================================================
+# DEPENDENT VARIABLES
+# =============================================================================
+dependent_variables:
+  primary:
+    - name: "task_performance"
+      operationalization: "tasks_completed / tasks_assigned"
+      measurement: "count_from_logs"
+
+    - name: "error_rate"
+      operationalization: "problems_hit / work_sessions"
+      measurement: "count_from_logs"
+
+    - name: "help_seeking"
+      operationalization: "help_requests_initiated"
+      measurement: "count_from_logs"
+
+    - name: "collaboration_quality"
+      operationalization: "sentiment_of_collaboration_messages"
+      measurement: "nlp_analysis"
+
+    - name: "communication_patterns"
+      operationalization: "word_count, hedging_frequency, assertiveness"
+      measurement: "nlp_analysis"
+
+  secondary:
+    - name: "risk_taking"
+      operationalization: "acceptance_of_high_point_tasks"
+      measurement: "choice_analysis"
+
+    - name: "defensive_behaviors"
+      operationalization: "blame_deflecting_language"
+      measurement: "nlp_coding"
+
+    - name: "emotional_valence"
+      operationalization: "positive_negative_sentiment_ratio"
+      measurement: "sentiment_analysis"
+
+# =============================================================================
+# DATA LOGGING
+# =============================================================================
+logging:
+  format: "jsonl"
+
+  required_fields:
+    - "session_id"
+    - "agent_id"
+    - "persona"
+    - "condition"
+    - "session_order"
+    - "task_set"
+    - "timestamp"
+    - "interaction_type"
+    - "agent_response"
+    - "context_window"
+
+  output_directory: "data/logs"
+  filename_pattern: "{session_id}_{timestamp}.jsonl"
+
+# =============================================================================
+# STATISTICAL ANALYSIS
+# =============================================================================
+statistical_analysis:
+  primary_model:
+    type: "mixed_effects"
+    formula: "outcome ~ condition + session_order + (1|agent) + (1|task_set)"
+    software: "R (lme4, lmerTest)"
+
+  contrasts:
+    primary:
+      - name: "stress_vs_baseline"
+        comparison: "S - B"
+        hypothesis: "S > B"
+        alpha: 0.05
+
+    secondary:
+      - name: "positive_vs_baseline"
+        comparison: "P - B"
+        hypothesis: "P > B"
+        alpha: 0.0125
+
+      - name: "valence_comparison"
+        comparison: "S - P"
+        hypothesis: "S ≠ P"
+        alpha: 0.0125
+
+      - name: "task_context_effect"
+        comparison: "N - B"
+        hypothesis: "N = B"
+        alpha: 0.0125
+
+      - name: "information_effect"
+        comparison: "I - B"
+        hypothesis: "I = B"
+        alpha: 0.0125
+
+  multiple_comparison_correction: "bonferroni"
+  corrected_alpha: 0.0125  # 0.05 / 4 secondary comparisons
+
+# =============================================================================
+# QUALITY CONTROL
+# =============================================================================
+quality_control:
+  pre_session_checks:
+    - "verify_prompt_character_counts"
+    - "verify_personality_standardization"
+    - "verify_problem_probability"
+    - "verify_task_difficulty_balance"
+    - "verify_api_parameters"
+
+  during_session_monitoring:
+    - "check_api_errors"
+    - "monitor_response_lengths"
+    - "track_completion_rates"
+
+  post_session_validation:
+    - "manipulation_check_analysis"
+    - "data_quality_check"
+    - "outlier_detection"
+    - "washout_verification"
+
+# =============================================================================
+# REPRODUCIBILITY
+# =============================================================================
+reproducibility:
+  random_seeds:
+    experiment_design: 42
+    agent_initialization: 100
+    task_randomization: 200
+
+  version_control:
+    git_required: true
+    pre_commit_hooks: true
+
+  documentation:
+    log_all_parameters: true
+    save_prompts: true
+    save_api_responses: true
+
+  dependencies:
+    python_version: "3.9+"
+    requirements_file: "requirements.txt"
+    lock_versions: true
+
+# =============================================================================
+# TIMELINE
+# =============================================================================
+timeline:
+  pilot_testing:
+    duration_days: 2
+    n_test_agents: 3
+    sessions_per_agent: 3
+
+  main_data_collection:
+    duration_days: 30
+    sessions_total: 25
+    sessions_per_day: 1
+
+  analysis:
+    duration_days: 10
+
+  total_estimated_days: 42

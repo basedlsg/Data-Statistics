@@ -1,0 +1,97 @@
+API CLIENT SYSTEM - CODE STRUCTURE
+===================================
+
+File: /home/user/Data-Statistics/study1/api_client.py
+
+CLASS HIERARCHY:
+├── CerebrasClient
+│   ├── __init__(api_key, model, max_retries, timeout)
+│   ├── generate(messages, temperature, max_tokens) → Dict | None
+│   └── close()
+│
+├── GeminiClient
+│   ├── __init__(api_key, model, max_retries, timeout)
+│   ├── generate(messages, temperature, max_tokens) → Dict | None
+│   ├── _convert_messages(messages) → str
+│   └── [no close needed]
+│
+└── APIManager
+    ├── __init__(cerebras_api_key, gemini_api_key, timeout)
+    ├── generate(messages, temperature, max_tokens, force_provider) → Dict | None
+    ├── get_stats() → Dict
+    ├── print_stats()
+    └── close()
+
+KEY FEATURES:
+=============
+
+1. CEREBRAS CLIENT (Primary)
+   - Model: llama3.1-8b
+   - SSL Bypass: httpx.Client(verify=False)
+   - Retry: 2 attempts, exponential backoff
+   - Timeout: 30 seconds
+   - Returns: {'content', 'latency', 'metadata'}
+
+2. GEMINI CLIENT (Fallback)
+   - Model: gemini-1.5-flash
+   - Library: google-generativeai
+   - Same retry logic as Cerebras
+   - Auto message conversion
+
+3. API MANAGER (Orchestrator)
+   - Primary → Cerebras (tries first)
+   - Fallback → Gemini (if Cerebras fails)
+   - Logging: Comprehensive
+   - Stats: Success rates, latency, errors
+
+ERROR HANDLING:
+===============
+✓ SSL certificate errors
+✓ Rate limits (429)
+✓ Timeouts
+✓ Connection failures
+✓ Invalid responses
+✓ Safety filter blocks (Gemini)
+
+RETRY STRATEGY:
+===============
+Attempt 1: Immediate
+Attempt 2: Wait 1 second
+Rate limit: Wait 5 seconds
+Safety block: No retry
+
+USAGE EXAMPLE:
+==============
+
+from api_client import APIManager
+
+manager = APIManager(
+    cerebras_api_key="csk-...",
+    gemini_api_key="AIzaSy..."
+)
+
+result = manager.generate(
+    messages=[
+        {"role": "system", "content": "You are helpful."},
+        {"role": "user", "content": "What is AI?"}
+    ],
+    temperature=0.7,
+    max_tokens=200
+)
+
+if result:
+    print(f"{result['provider']}: {result['content']}")
+    print(f"Latency: {result['latency']:.2f}s")
+
+manager.print_stats()
+manager.close()
+
+STATISTICS TRACKED:
+===================
+- Total requests
+- Success/failure counts per provider
+- Average/total latency
+- Fallback activation count
+- Last 10 errors with timestamps
+
+STATUS: Production-ready ✓

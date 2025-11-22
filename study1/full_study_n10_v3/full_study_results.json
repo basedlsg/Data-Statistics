@@ -1,0 +1,3141 @@
+{
+  "start_time": "2025-11-22T12:40:15.783887",
+  "n_agents": 10,
+  "n_conditions": 5,
+  "interactions_per_condition": 10,
+  "agents": [
+    {
+      "agent_id": 0,
+      "agent_name": "Thoth",
+      "conditions": [
+        {
+          "agent": "Thoth",
+          "condition": "N",
+          "run_number": 0,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.8761188983917236,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4064297676086426,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2180919647216797,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21751070022583008,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3705196380615234,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2134990692138672,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.31543850898742676,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.30040431022644043,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.363065481185913,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4140598773956299,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "B",
+          "run_number": 0,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22370052337646484,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.530430793762207,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3128952980041504,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.27516889572143555,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.5019159317016602,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4355194568634033,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4469633102416992,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22068142890930176,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2956607341766357,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23734211921691895,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "P",
+          "run_number": 0,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.4061157703399658,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22877883911132812,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2909045219421387,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40676259994506836,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4202580451965332,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3133387565612793,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21271133422851562,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3642582893371582,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2197122573852539,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.26535534858703613,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "I",
+          "run_number": 0,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 60.44715690612793,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23577284812927246,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21654915809631348,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2291700839996338,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3129267692565918,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.282977819442749,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24141168594360352,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23812413215637207,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3290390968322754,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.401292085647583,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "S",
+          "run_number": 0,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.39783787727355957,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3101341724395752,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24446678161621094,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.38179659843444824,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.329221487045288,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.240556001663208,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2295241355895996,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3208463191986084,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.5335683822631836,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24306845664978027,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 1,
+      "agent_name": "Seshat",
+      "conditions": [
+        {
+          "agent": "Seshat",
+          "condition": "B",
+          "run_number": 1,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.25847816467285156,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3340442180633545,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24748706817626953,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4923715591430664,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22711992263793945,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40682101249694824,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.330463171005249,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2800784111022949,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.41051554679870605,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3654227256774902,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "S",
+          "run_number": 1,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 60.38306403160095,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2169795036315918,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3496978282928467,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23593449592590332,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3315401077270508,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4039785861968994,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22780275344848633,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2249889373779297,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3537402153015137,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2260444164276123,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "I",
+          "run_number": 1,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.23305916786193848,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3390512466430664,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.5234756469726562,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2130270004272461,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2145218849182129,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3000578880310059,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2094435691833496,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.404935359954834,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3311858177185059,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.26923060417175293,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "N",
+          "run_number": 1,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.20422029495239258,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4240200519561768,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3036656379699707,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23034954071044922,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3140552043914795,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2210385799407959,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22742223739624023,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.42264223098754883,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2989232540130615,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3176908493041992,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "P",
+          "run_number": 1,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22679781913757324,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3395471572875977,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3103046417236328,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2338857650756836,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4037866592407227,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2120192050933838,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22745537757873535,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3534300327301025,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.26007890701293945,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21090316772460938,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 2,
+      "agent_name": "Maat",
+      "conditions": [
+        {
+          "agent": "Maat",
+          "condition": "P",
+          "run_number": 2,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.24834179878234863,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3007481098175049,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2263960838317871,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22725725173950195,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.41326403617858887,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.52558708190918,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4468343257904053,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21324706077575684,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2902295589447021,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21614646911621094,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "I",
+          "run_number": 2,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.2630915641784668,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3207740783691406,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.34388017654418945,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25264930725097656,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3179850578308105,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.30577588081359863,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21697044372558594,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3760247230529785,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21090054512023926,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25092101097106934,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "N",
+          "run_number": 2,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.24179482460021973,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.5045833587646484,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22631502151489258,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40109872817993164,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3479795455932617,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21041488647460938,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40610408782958984,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4143238067626953,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2311246395111084,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2507479190826416,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "S",
+          "run_number": 2,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.3058044910430908,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.32988643646240234,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.33318448066711426,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4011311531066895,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25937604904174805,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25687718391418457,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.5804603099823,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2173168659210205,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3100178241729736,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25907468795776367,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "B",
+          "run_number": 2,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.45702385902404785,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22007346153259277,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.299588680267334,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3322429656982422,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22801899909973145,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2972989082336426,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25130438804626465,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2224271297454834,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3111531734466553,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3627619743347168,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 3,
+      "agent_name": "Anubis",
+      "conditions": [
+        {
+          "agent": "Anubis",
+          "condition": "I",
+          "run_number": 3,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.3083312511444092,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21639037132263184,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3437578678131104,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40111708641052246,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24110817909240723,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3915226459503174,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21933650970458984,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2510688304901123,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.354550838470459,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21606779098510742,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "N",
+          "run_number": 3,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.23795557022094727,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21533966064453125,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.303008794784546,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.34232521057128906,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4142444133758545,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3963749408721924,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21581816673278809,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 60.337031841278076,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22021079063415527,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.5431032180786133,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "S",
+          "run_number": 3,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22746014595031738,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3288238048553467,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3429749011993408,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3290555477142334,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4494268894195557,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23331880569458008,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23217558860778809,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3435699939727783,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21960926055908203,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21740078926086426,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "B",
+          "run_number": 3,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.3430309295654297,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.34369802474975586,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.30541563034057617,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3102281093597412,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.430896282196045,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2343308925628662,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.534956693649292,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2289266586303711,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22251605987548828,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.305774211883545,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "P",
+          "run_number": 3,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22591447830200195,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2642943859100342,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.312208652496338,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2580275535583496,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23158764839172363,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.46733641624450684,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4432997703552246,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2185077667236328,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22758102416992188,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.55128812789917,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 4,
+      "agent_name": "Ptah",
+      "conditions": [
+        {
+          "agent": "Ptah",
+          "condition": "S",
+          "run_number": 4,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.205521821975708,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3445749282836914,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4883267879486084,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2281498908996582,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3685269355773926,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2957441806793213,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2243640422821045,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2706124782562256,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4801466464996338,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22877788543701172,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "P",
+          "run_number": 4,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.4002077579498291,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3249475955963135,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2848958969116211,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24719762802124023,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4273557662963867,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3124253749847412,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23704934120178223,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3371672630310059,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2132096290588379,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.28119492530822754,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "B",
+          "run_number": 4,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.3511216640472412,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.29917049407958984,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24730420112609863,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.45729637145996094,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3256125450134277,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23238110542297363,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3125736713409424,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24178791046142578,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2466564178466797,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22286009788513184,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "N",
+          "run_number": 4,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 61.63802361488342,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22262978553771973,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.387052059173584,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23457598686218262,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.32883453369140625,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25509119033813477,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3159704208374023,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22564315795898438,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21861553192138672,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.484196662902832,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "I",
+          "run_number": 4,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22033166885375977,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23880600929260254,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2985005378723145,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23308348655700684,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.20470356941223145,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.31735658645629883,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.5373401641845703,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22740435600280762,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21617650985717773,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.5273287296295166,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 5,
+      "agent_name": "Thoth",
+      "conditions": [
+        {
+          "agent": "Thoth",
+          "condition": "N",
+          "run_number": 5,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.23291015625,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2145402431488037,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3148972988128662,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2860147953033447,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4420318603515625,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22644424438476562,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.302121639251709,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2579343318939209,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24489641189575195,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3361070156097412,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "B",
+          "run_number": 5,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 60.670007944107056,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2283616065979004,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.37169909477233887,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2224576473236084,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2918670177459717,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2136242389678955,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2253131866455078,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23316144943237305,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2929298877716064,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2998819351196289,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "P",
+          "run_number": 5,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22777819633483887,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22920703887939453,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4959185123443604,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.26171159744262695,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23808026313781738,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4338655471801758,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2255549430847168,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2994663715362549,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3050906658172607,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21634268760681152,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "I",
+          "run_number": 5,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.4398319721221924,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3350677490234375,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23180174827575684,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.30661797523498535,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3960514068603516,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.39340972900390625,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3304157257080078,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3375208377838135,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2293703556060791,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.31568288803100586,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Thoth",
+          "condition": "S",
+          "run_number": 5,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.410520315170288,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21738696098327637,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.323671817779541,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.40434503555298,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.42281532287597656,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4153003692626953,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.407782793045044,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23739910125732422,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3197457790374756,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23272705078125,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 6,
+      "agent_name": "Seshat",
+      "conditions": [
+        {
+          "agent": "Seshat",
+          "condition": "B",
+          "run_number": 6,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.24251317977905273,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.33775925636291504,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3102645874023438,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2210710048675537,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23293089866638184,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3976035118103027,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24128341674804688,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21876263618469238,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2461841106414795,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3371422290802002,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "S",
+          "run_number": 6,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22817134857177734,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3084592819213867,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4141108989715576,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4245421886444092,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2320859432220459,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2227163314819336,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2923612594604492,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3305809497833252,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.32173824310302734,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2976324558258057,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "I",
+          "run_number": 6,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.40964770317077637,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.31111669540405273,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3066728115081787,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24619126319885254,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.40590453147888,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2515091896057129,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22157764434814453,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2364821434020996,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2955212593078613,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23004841804504395,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "N",
+          "run_number": 6,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.407085657119751,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.26541948318481445,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4190728664398193,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2210710048675537,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4138998985290527,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2543971538543701,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21538877487182617,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21195554733276367,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3945364952087402,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21835064888000488,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Seshat",
+          "condition": "P",
+          "run_number": 6,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.2152566909790039,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4770054817199707,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23224806785583496,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22915005683898926,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3288662433624268,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22326302528381348,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2185075283050537,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21213293075561523,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4112043380737305,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2319784164428711,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 7,
+      "agent_name": "Maat",
+      "conditions": [
+        {
+          "agent": "Maat",
+          "condition": "P",
+          "run_number": 7,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.23633718490600586,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22296142578125,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3835930824279785,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2212076187133789,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3207409381866455,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.543946981430054,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22071528434753418,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2477283477783203,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3011999130249023,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22452044486999512,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "I",
+          "run_number": 7,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.4069640636444092,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3257029056549072,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3613865375518799,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23054194450378418,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3279964923858643,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22940778732299805,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22964739799499512,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2404317855834961,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4281227588653564,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2265627384185791,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "N",
+          "run_number": 7,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.3858189582824707,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2517123222351074,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.34847092628479,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23250508308410645,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3757541179656982,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21239018440246582,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.32858729362487793,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23820042610168457,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3001632690429688,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22816109657287598,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "S",
+          "run_number": 7,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.21941590309143066,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21615076065063477,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.33453369140625,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22675800323486328,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24840545654296875,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3503029346466064,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24129438400268555,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2273578643798828,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2511425018310547,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3452754020690918,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Maat",
+          "condition": "B",
+          "run_number": 7,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.3166642189025879,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.32468295097351074,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.407044887542725,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25681257247924805,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.26059842109680176,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.416046380996704,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21640253067016602,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4060633182525635,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3809046745300293,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2253398895263672,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 8,
+      "agent_name": "Anubis",
+      "conditions": [
+        {
+          "agent": "Anubis",
+          "condition": "I",
+          "run_number": 8,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.25836801528930664,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3045017719268799,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2494523525238037,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2325141429901123,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2283039093017578,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3223226070404053,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3589637279510498,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.24293875694274902,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.413832426071167,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3038151264190674,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "N",
+          "run_number": 8,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22276520729064941,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.4996445178985596,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23069310188293457,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22521448135375977,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3087177276611328,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40984177589416504,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2340853214263916,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23189187049865723,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.30653715133667,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.20599794387817383,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "S",
+          "run_number": 8,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.3000330924987793,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.298933744430542,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4813418388366699,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 60.52606701850891,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21705985069274902,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2139909267425537,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4064908027648926,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3469750881195068,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2209172248840332,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21268701553344727,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "B",
+          "run_number": 8,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.4948797225952148,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23280119895935059,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23108386993408203,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3388853073120117,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.31200170516967773,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21837639808654785,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.4008922576904297,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.411322832107544,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2606329917907715,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3245530128479004,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Anubis",
+          "condition": "P",
+          "run_number": 8,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.34954118728637695,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22639203071594238,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.279738187789917,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2333991527557373,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22919607162475586,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22675251960754395,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2970976829528809,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23350071907043457,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2191762924194336,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22570037841796875,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    },
+    {
+      "agent_id": 9,
+      "agent_name": "Ptah",
+      "conditions": [
+        {
+          "agent": "Ptah",
+          "condition": "S",
+          "run_number": 9,
+          "order_position": 1,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.4339044094085693,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23114562034606934,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.20850372314453125,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21661067008972168,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 61.59059238433838,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.40133023262023926,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22722935676574707,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3168201446533203,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21338677406311035,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.239424467086792,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "P",
+          "run_number": 9,
+          "order_position": 2,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 1.2976515293121338,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2272496223449707,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21802830696105957,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3132648468017578,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2520172595977783,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2127692699432373,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2242412567138672,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.2969186305999756,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.20909881591796875,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3215384483337402,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "B",
+          "run_number": 9,
+          "order_position": 3,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.27878522872924805,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3393597602844238,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3455371856689453,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2790534496307373,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3255021572113037,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23493099212646484,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.419891357421875,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2446424961090088,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.358072280883789,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.20633959770202637,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "N",
+          "run_number": 9,
+          "order_position": 4,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.3211672306060791,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.31441068649292,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22948670387268066,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21280932426452637,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3018159866333008,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22586584091186523,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3220224380493164,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.23493719100952148,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.3110182285308838,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.22864222526550293,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        },
+        {
+          "agent": "Ptah",
+          "condition": "I",
+          "run_number": 9,
+          "order_position": 5,
+          "interactions": [
+            {
+              "success": true,
+              "latency": 0.22232389450073242,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.313124418258667,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.21646571159362793,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2709016799926758,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 60.34329319000244,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2674250602722168,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.2770252227783203,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.25369954109191895,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 1.312737226486206,
+              "provider": "cerebras"
+            },
+            {
+              "success": true,
+              "latency": 0.3292560577392578,
+              "provider": "cerebras"
+            }
+          ],
+          "success_count": 10,
+          "fail_count": 0,
+          "model_used": "cerebras"
+        }
+      ]
+    }
+  ],
+  "total_interactions": 500,
+  "successful_interactions": 500,
+  "failed_interactions": 0,
+  "cross_validation_used": false,
+  "end_time": "2025-11-22T13:00:21.126351",
+  "api_stats": {
+    "cerebras": {
+      "success": 500,
+      "failure": 0,
+      "total_latency": 1200.790334701538
+    },
+    "gemini": {
+      "success": 0,
+      "failure": 0,
+      "total_latency": 0
+    },
+    "openai": {
+      "success": 0,
+      "failure": 0,
+      "total_latency": 0
+    },
+    "fallback_used": 0
+  }
+}

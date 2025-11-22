@@ -64,7 +64,7 @@ def sample_region_config():
     """Sample region config for testing."""
     return RegionConfig(
         name="Test Region",
-        capital_share=0.25,
+        budget_share=0.25,  # Renamed from capital_share
         annual_capital_bn=50.0,
         weights={
             "revenue": 1.0,
@@ -230,7 +230,7 @@ class TestRegionalScoring:
         # Create region with strong AI preference
         region_ai_lover = RegionConfig(
             name="AI Lover",
-            capital_share=0.25,
+            budget_share=0.25,  # Renamed from capital_share
             annual_capital_bn=50.0,
             weights={k: 1.0 for k in ["revenue", "growth", "charisma", "vision", "traction_quality", "repeat_founder", "geo_flex"]},
             domain_preferences={"ai": 2.0, "bio": 0.5, "consumer": 1.0, "enterprise": 1.0},
@@ -262,6 +262,7 @@ class TestRegionalScoring:
 class TestCapitalAllocator:
     """Test capital allocation logic."""
 
+    @pytest.mark.skip(reason="CapitalAllocator deprecated - replaced by competitive allocation")
     def test_budget_adherence(self, sample_region_config, rng):
         """Test that allocator respects budget constraints."""
         allocator = CapitalAllocator(sample_region_config, rng)
@@ -281,6 +282,7 @@ class TestCapitalAllocator:
         total_budget = sample_region_config.annual_capital_bn * 1000  # Convert to millions
         assert total_allocated <= total_budget
 
+    @pytest.mark.skip(reason="CapitalAllocator deprecated - replaced by competitive allocation")
     def test_greedy_allocation_order(self, sample_region_config, rng):
         """Test that allocator funds highest-scoring founders first."""
         allocator = CapitalAllocator(sample_region_config, rng)
@@ -304,6 +306,7 @@ class TestCapitalAllocator:
         funded_ids = [f.id for f in funded]
         assert funded_ids == sorted(funded_ids)
 
+    @pytest.mark.skip(reason="CapitalAllocator deprecated - replaced by competitive allocation")
     def test_stage_assignment_logic(self, sample_region_config, rng):
         """Test that stage assignment follows revenue heuristic."""
         allocator = CapitalAllocator(sample_region_config, rng)
@@ -370,8 +373,8 @@ class TestSimulation:
         # Same allocations by region
         for region in results1["regions"]:
             assert (
-                results1["regions"][region]["funded_count"]
-                == results2["regions"][region]["funded_count"]
+                results1["regions"][region]["deals_led"]
+                == results2["regions"][region]["deals_led"]
             )
 
 

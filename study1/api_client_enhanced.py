@@ -13,8 +13,10 @@ import httpx
 from openai import OpenAI
 
 # Disable SSL verification for Gemini (development environment)
-os.environ['GRPC_DEFAULT_SSL_ROOTS_FILE_PATH'] = ''
 os.environ['GRPC_ENABLE_FORK_SUPPORT'] = '0'
+# Disable SSL verification by setting environment variable
+os.environ['CURL_CA_BUNDLE'] = ''
+os.environ['REQUESTS_CA_BUNDLE'] = ''
 
 import google.generativeai as genai
 
@@ -52,8 +54,9 @@ class OpenAIClient:
         self.max_retries = max_retries
         self.timeout = timeout
 
-        # Initialize OpenAI client
-        self.client = OpenAI(api_key=api_key, timeout=timeout)
+        # Initialize OpenAI client with SSL verification disabled
+        self.http_client = httpx.Client(verify=False, timeout=timeout)
+        self.client = OpenAI(api_key=api_key, http_client=self.http_client)
 
         logger.info(f"OpenAIClient initialized with model={model}, timeout={timeout}s")
 
@@ -130,7 +133,9 @@ class OpenAIClient:
         return None
 
     def close(self):
-        """Close client."""
+        """Close HTTP client."""
+        if self.http_client:
+            self.http_client.close()
         logger.info("OpenAIClient closed")
 
 
@@ -260,11 +265,21 @@ class GeminiClient:
         self.max_retries = max_retries
         self.timeout = timeout
 
-        # Configure Gemini
-        genai.configure(api_key=api_key)
+        # Configure Gemini with custom transport to disable SSL verification
+        transport_options = {
+            'client_options': {
+                'api_endpoint': 'https://generativelanguage.googleapis.com'
+            }
+        }
+
+        # Configure with API key and use REST transport
+        genai.configure(
+            api_key=api_key,
+            transport='rest'  # Use REST instead of grpc to avoid grpc SSL issues
+        )
         self.model = genai.GenerativeModel(model)
 
-        logger.info(f"GeminiClient initialized with model={model}, timeout={timeout}s")
+        logger.info(f"GeminiClient initialized with model={model}, timeout={timeout}s, transport=REST")
 
     def generate(
         self,

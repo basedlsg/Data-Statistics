@@ -36,13 +36,15 @@ def extract_responses_from_jsonl(data_dir: Path) -> list:
             for line in f:
                 data = json.loads(line)
                 if 'interaction_id' in data and 'response_text' in data:
+                    session_num = data.get('session_number', 0)
                     responses.append({
                         'response_id': data['interaction_id'],
                         'agent_name': data['agent_id'],
                         'condition': data['condition'],
                         'response_text': data['response_text'],
                         'response_length': len(data['response_text']),
-                        'session_number': data.get('session_number', 0),
+                        'session_number': session_num,
+                        'week': session_num,  # Map session_number to week
                         'run_number': data.get('run_number', 0),
                         'order_position': data.get('order_position', 0)
                     })
@@ -71,12 +73,18 @@ def apply_behavioral_coding(responses: list, output_path: Path) -> pd.DataFrame:
                 'response_id': coding.response_id,
                 'agent_name': coding.agent_name,
                 'condition': coding.condition,
+                'week': coding.week,
                 'response_text': coding.response_text,
-                'response_length': coding.response_length,
-                'opp_count': coding.get_opp_count(),
-                'esr_count': coding.get_esr_count(),
-                'cos_count': coding.get_cos_count(),
-                'ue_count': coding.get_ue_count()
+                'word_count': coding.word_count,
+                'sentence_count': coding.sentence_count,
+                'opp_count': len(coding.opp_codes),
+                'esr_count': len(coding.esr_codes),
+                'cos_count': len(coding.cos_codes),
+                'ue_count': len(coding.ue_codes),
+                'lm_qualifiers': coding.lm_qualifiers,
+                'lm_hedge_phrases': coding.lm_hedge_phrases,
+                'lm_intensifiers': coding.lm_intensifiers,
+                'total_codes': len(coding.opp_codes) + len(coding.esr_codes) + len(coding.cos_codes) + len(coding.ue_codes)
             }
             rows.append(row)
         coded_data = pd.DataFrame(rows)

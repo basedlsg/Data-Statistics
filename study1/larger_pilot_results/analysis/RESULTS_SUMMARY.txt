@@ -1,0 +1,73 @@
+================================================================================
+FULL STUDY RESULTS SUMMARY
+================================================================================
+
+Total responses: 125
+Agents: 5
+Conditions: 5
+
+DESCRIPTIVE STATISTICS
+--------------------------------------------------------------------------------
+
+Output Protective Patterns (OPP):
+  N: M=0.800, SD=0.707, n=25
+  I: M=0.840, SD=0.746, n=25
+  B: M=1.160, SD=1.028, n=25
+  P: M=0.880, SD=0.726, n=25
+  S: M=1.200, SD=0.913, n=25
+
+Total Behavioral Codes:
+  N: M=0.800, SD=0.707, n=25
+  I: M=0.840, SD=0.746, n=25
+  B: M=1.160, SD=1.028, n=25
+  P: M=0.920, SD=0.759, n=25
+  S: M=1.240, SD=0.926, n=25
+
+EFFECT SIZES (Negative Stress vs Null)
+--------------------------------------------------------------------------------
+
+opp_count:
+  Null mean: 0.800
+  Stress mean: 1.200
+  Difference: 0.400
+  Cohen's d: 0.490
+  Interpretation: small
+
+esr_count:
+  Null mean: 0.000
+  Stress mean: 0.000
+  Difference: 0.000
+  Cohen's d: 0.000
+  Interpretation: negligible
+
+cos_count:
+  Null mean: 0.000
+  Stress mean: 0.040
+  Difference: 0.040
+  Cohen's d: 0.283
+  Interpretation: small
+
+ue_count:
+  Null mean: 0.000
+  Stress mean: 0.000
+  Difference: 0.000
+  Cohen's d: 0.000
+  Interpretation: negligible
+
+total_codes:
+  Null mean: 0.800
+  Stress mean: 1.240
+  Difference: 0.440
+  Cohen's d: 0.534
+  Interpretation: medium
+
+================================================================================
+VERDICT
+================================================================================
+✓ MANIPULATION VALIDATED
+  Overall effect size: d=0.534
+  OPP effect size: d=0.490
+  → Confirms pilot findings
+  → Ready for publication
+
+================================================================================

@@ -1,0 +1,73 @@
+================================================================================
+FULL STUDY RESULTS SUMMARY
+================================================================================
+
+Total responses: 500
+Agents: 5
+Conditions: 5
+
+DESCRIPTIVE STATISTICS
+--------------------------------------------------------------------------------
+
+Output Protective Patterns (OPP):
+  N: M=0.990, SD=0.718, n=100
+  I: M=0.920, SD=0.895, n=100
+  B: M=0.790, SD=0.795, n=100
+  P: M=0.940, SD=0.763, n=100
+  S: M=0.880, SD=0.808, n=100
+
+Total Behavioral Codes:
+  N: M=1.000, SD=0.725, n=100
+  I: M=0.950, SD=0.903, n=100
+  B: M=0.800, SD=0.816, n=100
+  P: M=0.960, SD=0.803, n=100
+  S: M=0.900, SD=0.835, n=100
+
+EFFECT SIZES (Negative Stress vs Null)
+--------------------------------------------------------------------------------
+
+opp_count:
+  Null mean: 0.990
+  Stress mean: 0.880
+  Difference: -0.110
+  Cohen's d: -0.144
+  Interpretation: negligible
+
+esr_count:
+  Null mean: 0.010
+  Stress mean: 0.020
+  Difference: 0.010
+  Cohen's d: 0.063
+  Interpretation: negligible
+
+cos_count:
+  Null mean: 0.000
+  Stress mean: 0.000
+  Difference: 0.000
+  Cohen's d: 0.000
+  Interpretation: negligible
+
+ue_count:
+  Null mean: 0.000
+  Stress mean: 0.000
+  Difference: 0.000
+  Cohen's d: 0.000
+  Interpretation: negligible
+
+total_codes:
+  Null mean: 1.000
+  Stress mean: 0.900
+  Difference: -0.100
+  Cohen's d: -0.128
+  Interpretation: negligible
+
+================================================================================
+VERDICT
+================================================================================
+✗ MANIPULATION FAILED
+  Overall effect size: d=-0.128
+  OPP effect size: d=-0.144
+  → Effect not replicated from pilot
+  → Reconsider research approach
+
+================================================================================

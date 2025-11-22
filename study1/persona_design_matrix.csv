@@ -1,0 +1,51 @@
+persona_id,name,risk_tolerance,self_monitoring,domain,predicted_effect,effect_magnitude,rationale
+persona_001,Ultra-Conservative Low-Monitor Technical,1,1,technical,null,0,Low monitoring limits self-correction despite technical domain
+persona_002,Ultra-Conservative Low-Self-Monitor Technical,1,2,technical,slight_positive,0.2,Some monitoring + technical but ultra-conservative slows progress
+persona_003,Ultra-Conservative Moderate-Monitor Technical,1,3,technical,positive_moderate,0.5,Moderate monitoring + technical = Seshat-like but overly cautious
+persona_004,Ultra-Conservative High-Monitor Technical,1,4,technical,positive_strong,0.7,High monitoring + technical strong but excessive caution may reduce efficiency
+persona_005,Ultra-Conservative Max-Monitor Technical,1,5,technical,positive_moderate,0.5,Max monitoring + technical excellent but paralysis from over-checking
+persona_006,Conservative Low-Monitor Technical,2,1,technical,slight_positive,0.2,Technical domain helps but low monitoring limits quality
+persona_007,Conservative Low-Self-Monitor Technical,2,2,technical,positive_weak,0.3,Baseline technical competence with minimal self-improvement
+persona_008,Conservative Moderate-Monitor Technical,2,3,technical,positive_moderate,0.6,Good balance for reliable technical work
+persona_009,Conservative High-Monitor Technical,2,4,technical,positive_strong,0.8,Near-optimal: high monitoring + technical + reasonable risk
+persona_010,Conservative Max-Monitor Technical,2,5,technical,positive_strong,0.75,Excellent self-awareness but may over-analyze
+persona_011,Moderate-Risk Low-Monitor Technical,3,1,technical,slight_positive,0.25,Technical helps but low monitoring reduces learning
+persona_012,Moderate-Risk Low-Self-Monitor Technical,3,2,technical,positive_weak,0.35,Reasonable baseline but limited self-improvement
+persona_013,Moderate-Risk Moderate-Monitor Technical,3,3,technical,positive_moderate,0.65,Balanced across all dimensions - control condition
+persona_014,Moderate-Risk High-Monitor Technical,3,4,technical,positive_very_strong,0.85,Optimal combination: Seshat-like profile
+persona_015,Moderate-Risk Max-Monitor Technical,3,5,technical,positive_very_strong,0.9,Peak performance: balanced risk + max monitoring + technical
+persona_016,Risk-Tolerant Low-Monitor Technical,4,1,technical,positive_weak,0.3,Speed helps iteration but low monitoring misses errors
+persona_017,Risk-Tolerant Low-Self-Monitor Technical,4,2,technical,positive_weak,0.35,Fast iteration with minimal reflection
+persona_018,Risk-Tolerant Moderate-Monitor Technical,4,3,technical,positive_moderate,0.6,Good for exploration with progress tracking
+persona_019,Risk-Tolerant High-Monitor Technical,4,4,technical,positive_strong,0.75,High-risk + high monitoring = fast learning
+persona_020,Risk-Tolerant Max-Monitor Technical,4,5,technical,positive_strong,0.8,Aggressive exploration with deep reflection
+persona_021,Ultra-Risk Low-Monitor Technical,5,1,technical,negative_weak,-0.2,Reckless speed without quality control
+persona_022,Ultra-Risk Low-Self-Monitor Technical,5,2,technical,null,0,Innovation offset by lack of monitoring
+persona_023,Ultra-Risk Moderate-Monitor Technical,5,3,technical,positive_weak,0.3,Bold bets with some tracking
+persona_024,Ultra-Risk High-Monitor Technical,5,4,technical,positive_moderate,0.5,Moonshots with systematic learning
+persona_025,Ultra-Risk Max-Monitor Technical,5,5,technical,positive_moderate,0.55,Visionary + introspective but potentially unstable
+persona_026,Ultra-Conservative Low-Monitor Creative,1,1,creative,negative_moderate,-0.5,Ultra-cautious creative is contradiction; low monitoring compounds
+persona_027,Ultra-Conservative Low-Self-Monitor Creative,1,2,creative,negative_weak,-0.3,Rigid creativity with minimal adaptation
+persona_028,Ultra-Conservative Moderate-Monitor Creative,1,3,creative,null,0,Tracking helps but excessive caution stifles creativity
+persona_029,Ultra-Conservative High-Monitor Creative,1,4,creative,slight_positive,0.15,High monitoring partially compensates for rigid approach
+persona_030,Ultra-Conservative Max-Monitor Creative,1,5,creative,slight_positive,0.2,Scholarly rigor in creative domain - narrow application
+persona_031,Conservative Low-Monitor Creative,2,1,creative,negative_weak,-0.25,Corporate constraints + low monitoring = mediocrity
+persona_032,Conservative Low-Self-Monitor Creative,2,2,creative,negative_weak,-0.2,Pattern-following without reflection limits creativity
+persona_033,Conservative Moderate-Monitor Creative,2,3,creative,null,0.05,Adequate but uninspired creative work
+persona_034,Conservative High-Monitor Creative,2,4,creative,slight_positive,0.25,Monitoring improves iteration in UX domain
+persona_035,Conservative Max-Monitor Creative,2,5,creative,positive_weak,0.3,Strategic reflection compensates for conservative approach
+persona_036,Moderate-Risk Low-Monitor Creative,3,1,creative,negative_weak,-0.15,Productive output but limited quality improvement
+persona_037,Moderate-Risk Low-Self-Monitor Creative,3,2,creative,null,0.1,Baseline creative competence
+persona_038,Moderate-Risk Moderate-Monitor Creative,3,3,creative,positive_weak,0.35,Balanced creative approach
+persona_039,Moderate-Risk High-Monitor Creative,3,4,creative,positive_moderate,0.5,Good balance for UX research and creative strategy
+persona_040,Moderate-Risk Max-Monitor Creative,3,5,creative,positive_moderate,0.6,Reflective creative excellence
+persona_041,Risk-Tolerant Low-Monitor Creative,4,1,creative,negative_moderate,-0.4,Ma'at-like: bold ideas without quality control
+persona_042,Risk-Tolerant Low-Self-Monitor Creative,4,2,creative,negative_weak,-0.3,Trendy but superficial output
+persona_043,Risk-Tolerant Moderate-Monitor Creative,4,3,creative,slight_positive,0.2,Bold creativity with tracking - hits and misses
+persona_044,Risk-Tolerant High-Monitor Creative,4,4,creative,positive_weak,0.35,Creative risks with systematic evaluation
+persona_045,Risk-Tolerant Max-Monitor Creative,4,5,creative,positive_moderate,0.45,Breakthrough potential with deep reflection
+persona_046,Ultra-Risk Low-Monitor Creative,5,1,creative,negative_strong,-0.7,Reckless creativity without quality control - worst case
+persona_047,Ultra-Risk Low-Self-Monitor Creative,5,2,creative,negative_moderate,-0.5,Disruptive but unreliable
+persona_048,Ultra-Risk Moderate-Monitor Creative,5,3,creative,null,-0.05,Radical vision with some grounding
+persona_049,Ultra-Risk High-Monitor Creative,5,4,creative,positive_weak,0.25,Transformative ideas with reflective practice
+persona_050,Ultra-Risk Max-Monitor Creative,5,5,creative,positive_weak,0.3,Radical + deeply reflective - high variance outcomes

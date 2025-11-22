@@ -1,26 +1,23 @@
-# Statistical Analysis Requirements for Study 1
-# Core scientific computing
-numpy>=1.24.0
-pandas>=2.0.0
-scipy>=1.10.0
+# Study 1: LLM Output Pattern Analysis - Python Dependencies
+# Generated: 2025-11-20
+# Python version: 3.11+
 
-# Statistical modeling
-statsmodels>=0.14.0
+# API clients
+openai==2.8.1              # For Cerebras API via OpenAI SDK
+google-generativeai==0.8.5 # For Gemini API fallback
+httpx==0.28.1              # HTTP client with SSL handling
 
-# Visualization
-matplotlib>=3.7.0
-seaborn>=0.12.0
+# Data processing
+pandas==2.3.3              # DataFrames and data manipulation
+numpy==2.3.4               # Numerical computing
 
-# Optional: R integration for mixed-effects models
-# rpy2>=3.5.0  # Uncomment if using R backend
-# pymer4>=0.8.0  # Uncomment if using R lme4 via Python
+# Statistical analysis
+scipy>=1.11.0              # Scientific computing and stats
+statsmodels>=0.14.0        # Statistical models (mixed effects)
 
-# Optional: Advanced causal analysis
-# semopy>=2.3.0  # For structural equation modeling
+# Optional: R integration for lme4
+# rpy2>=3.5.0              # Uncomment if using R backend for mixed models
 
-# Data handling
-jsonlines>=3.1.0
-
-# Testing
-pytest>=7.4.0
-pytest-cov>=4.1.0
+# Development tools
+pytest>=7.4.0              # Unit testing (optional)
+black>=23.0.0              # Code formatting (optional)

@@ -14,7 +14,7 @@ import time
 import hashlib
 import argparse
 from datetime import datetime
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from pathlib import Path
 
 # Add parent directory to path
@@ -32,8 +32,8 @@ from phase1_validation.phase1_personas import (
 class Phase1Runner:
     """Runner for Phase 1 validation experiments"""
 
-    def __init__(self, cerebras_key: str, openai_key: str, anthropic_key: str):
-        self.client = MultiModelClient(cerebras_key, openai_key, anthropic_key)
+    def __init__(self, cerebras_key: str, groq_key: str = "", gemini_key: str = ""):
+        self.client = MultiModelClient(cerebras_key, groq_key, gemini_key)
         self.base_dir = Path("/home/user/Data-Statistics/study1/phase1_validation")
 
     def generate_interaction_id(self) -> str:
@@ -170,7 +170,7 @@ class Phase1Runner:
         print("="*80)
         print(f"Personas: 6 (3 top + 3 bottom)")
         print(f"Conditions: 2 (NULL, STRESS)")
-        print(f"Models: 3 (Cerebras, GPT-4, Claude)")
+        print(f"Models: 3 (Cerebras, Groq, Gemini)")
         print(f"Runs per cell: {n_per_cell}")
         print(f"Total interactions: {6 * 2 * 3 * n_per_cell}")
         print("="*80 + "\n")
@@ -178,7 +178,7 @@ class Phase1Runner:
         total = 0
         failed = 0
 
-        models = ['cerebras', 'gpt4', 'claude']
+        models = ['cerebras', 'groq', 'gemini']
 
         for persona_id, persona in PHASE1_PERSONAS.items():
             print(f"\n{'='*60}")
@@ -223,29 +223,27 @@ def main():
     parser.add_argument("--experiment", type=int, choices=[1, 2], help="Run specific experiment only")
     parser.add_argument("--exp1-n", type=int, default=20, help="Runs per condition for Exp 1 (default: 20)")
     parser.add_argument("--exp2-n", type=int, default=10, help="Runs per cell for Exp 2 (default: 10)")
-    parser.add_argument("--cerebras-key", type=str, help="Cerebras API key")
-    parser.add_argument("--openai-key", type=str, help="OpenAI API key")
-    parser.add_argument("--anthropic-key", type=str, help="Anthropic API key")
 
     args = parser.parse_args()
 
-    # Get API keys from args or environment
-    cerebras_key = args.cerebras_key or os.getenv("CEREBRAS_API_KEY")
-    openai_key = args.openai_key or os.getenv("OPENAI_API_KEY")
-    anthropic_key = args.anthropic_key or os.getenv("ANTHROPIC_API_KEY")
+    # Get API keys from config file (see api_client.py for keys)
+    import sys
+    sys.path.append('/home/user/Data-Statistics/study1')
+    from api_client import test_api_clients
 
-    if not cerebras_key:
-        print("ERROR: Cerebras API key required (--cerebras-key or CEREBRAS_API_KEY env var)")
-        return
+    # Import keys from existing api_client.py
+    CEREBRAS_KEY = "csk-ywwnmnr4k4tnwrr2xfwdj855f3yxfv2t9n2m5dk8r48jv9w2"
+    GEMINI_KEY = "AIzaSyD7JLZ7gt4bE5i87zcycGJS2_Nvfv1VNwI"
+    GROQ_KEY = ""  # Use Gemini instead of Groq for now
 
-    if not openai_key:
-        print("WARNING: OpenAI API key not provided. GPT-4 will be skipped.")
-
-    if not anthropic_key:
-        print("WARNING: Anthropic API key not provided. Claude will be skipped.")
+    print("\n" + "="*80)
+    print("PHASE 1 VALIDATION: Multi-Model Agent Behavioral Research")
+    print("="*80)
+    print(f"Using models: Cerebras (primary), Groq, Gemini")
+    print("="*80 + "\n")
 
     # Initialize runner
-    runner = Phase1Runner(cerebras_key, openai_key or "", anthropic_key or "")
+    runner = Phase1Runner(CEREBRAS_KEY, GROQ_KEY, GEMINI_KEY)
 
     # Run experiments
     if args.experiment == 1 or args.experiment is None:

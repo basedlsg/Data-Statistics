@@ -325,8 +325,8 @@ def main():
     """Main analysis pipeline."""
 
     # Configuration
-    data_dir = Path("larger_pilot_results/data/raw")
-    output_dir = Path("larger_pilot_results/analysis")
+    data_dir = Path("full_study_n10_v2/data/raw")
+    output_dir = Path("full_study_n10_v2/analysis")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     print("="*80)

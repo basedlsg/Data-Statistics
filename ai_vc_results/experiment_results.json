@@ -1,6 +1,6 @@
 {
   "config": {
-    "api_provider": "mock",
+    "api_provider": "gemini",
     "model": "gemini-1.5-flash",
     "temperature": 0.7,
     "n_pitches": 20,
@@ -62,5 +62,5 @@
   },
   "n_stimuli": 20,
   "n_evaluations": 80,
-  "timestamp": "2025-12-02T14:38:44.849170"
+  "timestamp": "2025-12-02T15:29:48.077569"
 }

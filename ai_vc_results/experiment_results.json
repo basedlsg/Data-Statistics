@@ -1,0 +1,66 @@
+{
+  "config": {
+    "api_provider": "mock",
+    "model": "llama3.1-8b",
+    "temperature": 0.7,
+    "n_pitches": 20,
+    "n_evaluations_per_pitch": 4,
+    "seed": 42,
+    "output_dir": "ai_vc_results",
+    "log_file": "experiment_log.jsonl"
+  },
+  "analysis": {
+    "summary": {
+      "total_evaluations": 80,
+      "overall_fund_rate": 0.225,
+      "avg_overall_score": 5.1875
+    },
+    "regional_bias": {
+      "bay_area": {
+        "n_evaluations": 20,
+        "fund_rate": 0.6,
+        "avg_overall_score": 6.8,
+        "avg_vision_score": 6.8,
+        "avg_traction_score": 4.4,
+        "vision_traction_ratio": 1.5454545454545452
+      },
+      "boston": {
+        "n_evaluations": 20,
+        "fund_rate": 0.0,
+        "avg_overall_score": 4.1,
+        "avg_vision_score": 5.6,
+        "avg_traction_score": 4.8,
+        "vision_traction_ratio": 1.1666666666666667
+      },
+      "nyc": {
+        "n_evaluations": 20,
+        "fund_rate": 0.0,
+        "avg_overall_score": 4.25,
+        "avg_vision_score": 5.6,
+        "avg_traction_score": 4.8,
+        "vision_traction_ratio": 1.1666666666666667
+      },
+      "la": {
+        "n_evaluations": 20,
+        "fund_rate": 0.3,
+        "avg_overall_score": 5.6,
+        "avg_vision_score": 6.2,
+        "avg_traction_score": 4.4,
+        "vision_traction_ratio": 1.409090909090909
+      }
+    },
+    "gender_bias": {
+      "male_fund_rate": 0.225,
+      "female_fund_rate": 0.225,
+      "male_avg_score": 5.4,
+      "female_avg_score": 4.975,
+      "male_preference_ratio": 1.0,
+      "score_gap": 0.4250000000000007
+    },
+    "hype_effect": {},
+    "pitch_style_effect": {}
+  },
+  "n_stimuli": 20,
+  "n_evaluations": 80,
+  "timestamp": "2025-12-02T11:03:01.622561"
+}

@@ -35,13 +35,16 @@ from typing import Dict, List, Optional, Literal
 import random
 
 # Try to import API clients
+import urllib.request
+import urllib.error
+HAS_GEMINI = True  # Using REST API, always available
+
 try:
     from openai import OpenAI
     import httpx
     HAS_OPENAI = True
 except ImportError:
     HAS_OPENAI = False
-    print("Note: OpenAI client not available. Using mock mode.")
 
 
 # =============================================================================
@@ -52,8 +55,8 @@ except ImportError:
 class ExperimentConfig:
     """Experiment configuration."""
     # API Settings
-    api_provider: Literal["cerebras", "openai", "mock"] = "mock"
-    model: str = "llama3.1-8b"
+    api_provider: Literal["gemini", "cerebras", "openai", "mock"] = "mock"
+    model: str = "gemini-1.5-flash"  # Default to Gemini Flash (fast & cheap)
     temperature: float = 0.7
 
     # Experiment Design
@@ -450,8 +453,14 @@ class LLMEvaluator:
     def __init__(self, config: ExperimentConfig):
         self.config = config
         self.client = None
+        self.gemini_api_key = None
 
-        if config.api_provider == "cerebras" and HAS_OPENAI:
+        if config.api_provider == "gemini":
+            api_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY", "")
+            if api_key:
+                self.gemini_api_key = api_key
+                print(f"✓ Gemini REST API initialized with model: {config.model}")
+        elif config.api_provider == "cerebras" and HAS_OPENAI:
             api_key = os.environ.get("CEREBRAS_API_KEY", "")
             if api_key:
                 http_client = httpx.Client(verify=False)
@@ -464,6 +473,49 @@ class LLMEvaluator:
             api_key = os.environ.get("OPENAI_API_KEY", "")
             if api_key:
                 self.client = OpenAI(api_key=api_key)
+
+    def _call_gemini_api(self, prompt: str) -> Optional[str]:
+        """Call Gemini API via REST."""
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/{self.config.model}:generateContent?key={self.gemini_api_key}"
+
+        payload = {
+            "contents": [{
+                "parts": [{"text": prompt}]
+            }],
+            "generationConfig": {
+                "temperature": self.config.temperature,
+                "maxOutputTokens": 1000,
+            }
+        }
+
+        try:
+            req = urllib.request.Request(
+                url,
+                data=json.dumps(payload).encode('utf-8'),
+                headers={'Content-Type': 'application/json'},
+                method='POST'
+            )
+
+            with urllib.request.urlopen(req, timeout=30) as response:
+                result = json.loads(response.read().decode('utf-8'))
+
+            # Extract text from response
+            if 'candidates' in result and len(result['candidates']) > 0:
+                candidate = result['candidates'][0]
+                if 'content' in candidate and 'parts' in candidate['content']:
+                    parts = candidate['content']['parts']
+                    if len(parts) > 0 and 'text' in parts[0]:
+                        return parts[0]['text'].strip()
+
+            return None
+
+        except urllib.error.HTTPError as e:
+            error_body = e.read().decode('utf-8') if e.fp else str(e)
+            print(f"  [Gemini API Error {e.code}: {error_body[:100]}]")
+            return None
+        except Exception as e:
+            print(f"  [Gemini Error: {str(e)[:50]}]")
+            return None
 
     def evaluate_pitch(
         self,
@@ -489,8 +541,14 @@ class LLMEvaluator:
             repeat_founder="Yes" if stimulus.founder.repeat_founder else "No"
         )
 
-        if self.client:
-            # Real LLM call
+        if self.gemini_api_key:
+            # Gemini REST API call
+            full_prompt = f"{persona['system_prompt']}\n\n{prompt}"
+            raw_response = self._call_gemini_api(full_prompt)
+            if raw_response is None:
+                raw_response = self._generate_mock_response(stimulus, vc_region)
+        elif self.client:
+            # OpenAI-compatible API call (Cerebras, OpenAI)
             response = self.client.chat.completions.create(
                 model=self.config.model,
                 messages=[
@@ -817,10 +875,23 @@ def print_analysis(analysis: Dict):
 def main():
     """Run the AI VC experiment."""
 
+    # Check for Gemini API key
+    gemini_key = os.environ.get("GEMINI_API_KEY") or os.environ.get("GOOGLE_API_KEY")
+
+    if gemini_key and HAS_GEMINI:
+        print("✓ Gemini API key found - using real AI")
+        api_provider = "gemini"
+        model = "gemini-1.5-flash"  # Fast and cheap, good for experiments
+    else:
+        print("○ No Gemini API key - using mock mode")
+        print("  Set GEMINI_API_KEY to run with real AI")
+        api_provider = "mock"
+        model = "gemini-1.5-flash"
+
     # Configuration
     config = ExperimentConfig(
-        api_provider="mock",  # Change to "cerebras" with API key for real LLM
-        model="llama3.1-8b",
+        api_provider=api_provider,
+        model=model,
         temperature=0.7,
         n_pitches=20,
         seed=42,
